@@ -8,6 +8,7 @@ Created on Sat Mar 11 13:17:52 2023
 import characters
 import area
 import menu
+from os import system
 
 width = height = 10
 
@@ -28,6 +29,8 @@ all_creatures.append(characters.Mob(4, 3))
 
 def __main__():
     while True:
+        system('cls')
+        print('\n\n\n')
         place.show(all_creatures)
         menu.menu(person, place)
         for c in all_creatures:

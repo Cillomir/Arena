@@ -12,12 +12,12 @@ import characters
 
 def menu(user: 'characters.PC', place: 'area.Area'):
     exits = place.exits(user.loc_x, user.loc_y)
-    print('\nAvailable exits (', end='')
+    print('\n\tAvailable exits (', end='')
     for e in exits:
         print(f"'{e}'", end=',')
     print('\b)')
-    print("Other commands: 'q' - Quit")
-    cmd = input('Enter a command: ')
+    print("\tOther commands: 'q' - Quit")
+    cmd = input('\tEnter a command: ')
     if cmd in exits:
         user.move(cmd)
     elif cmd == 'q':

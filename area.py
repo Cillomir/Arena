@@ -21,6 +21,7 @@ class Area:
         mobiles = [(c.loc_x, c.loc_y) for c in creatures if type(c) is characters.Mob]
 
         for y in range(self.height):
+            print('', end='\t')
             for x in range(self.width):
                 if (x, y) in character:
                     print(colors.Fore.blue, '@', end=f'{colors.Effect.reset} ')

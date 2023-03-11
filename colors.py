@@ -1,3 +1,7 @@
+import colorama
+colorama.init()
+
+
 class Effect:
     reset = '\033[0m'
     bold = '\033[01m'
