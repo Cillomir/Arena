@@ -26,9 +26,11 @@ def start_menu():
         print('\t[I] - Instructions')
         print('\t[S] - Settings')
         print('\t[Q] - Quit')
-        cmd = (input(colors.Effect.reset, 'Your command? ')).lower()
+        print(colors.Effect.reset, end='')
+        cmd = (input('Your command? ')).lower()
         if cmd == 'n':
-            pass
+            if new_game():
+                break
         elif cmd == 'l':
             pass
         elif cmd == 'i':
@@ -37,6 +39,32 @@ def start_menu():
             pass
         elif cmd == 'q':
             exit()
+
+
+def new_game() -> bool:
+    print('\n\tType RETURN to go back to the main menu')
+    while True:
+        name = input('Enter your name, adventurer: ')
+        if name == 'RETURN':
+            return False
+        elif name.isdigit() or not name.isalpha():
+            print('Please enter a valid name (a single word containing only letters)')
+        else:
+            print(f'Welcome {name}')
+            break
+    return True
+
+
+def load_game():
+    pass
+
+
+def instructions():
+    pass
+
+
+def settings():
+    pass
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,3 +82,7 @@ def menu(user: 'characters.PC', place: 'area.Area'):
         user.move(cmd)
     elif cmd == 'q':
         exit()
+
+
+if __name__ == '__main__':
+    start_menu()
