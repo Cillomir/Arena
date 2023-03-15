@@ -23,6 +23,10 @@ class PC(Character):
     def __init__(self, name: 'str', loc_x: 'int', loc_y: 'int'):
         super().__init__(name, loc_x, loc_y, 20, 6, 5)
 
+    def load(self, player: 'dict'):
+        for key in player:
+            setattr(self, key, player[key])
+
     def move(self, direction: 'chr'):
         if direction == 'n':
             self.loc_y -= 1

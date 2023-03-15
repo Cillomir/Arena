@@ -10,6 +10,7 @@ import area
 import characters
 from os import system
 import colors
+import player
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,16 +29,17 @@ def start_menu():
         print('\t[Q] - Quit')
         print(colors.Effect.reset, end='')
         cmd = (input('Your command? ')).lower()
-        if cmd == 'n':
+        if cmd == 'n' or cmd == 'new' or cmd == 'new game':
             if new_game():
                 break
-        elif cmd == 'l':
+        elif cmd == 'l' or cmd == 'load' or cmd == 'load game':
+            if load_game():
+                break
+        elif cmd == 'i' or cmd == 'instruction' or cmd == 'instructions':
             pass
-        elif cmd == 'i':
+        elif cmd == 's' or cmd == 'setting' or cmd == 'settings':
             pass
-        elif cmd == 's':
-            pass
-        elif cmd == 'q':
+        elif cmd == 'q' or cmd == 'quit':
             exit()
 
 
@@ -52,11 +54,25 @@ def new_game() -> bool:
         else:
             print(f'Welcome {name}')
             break
+    player.new_player(name)
     return True
 
 
 def load_game():
-    pass
+    print('\n\tType RETURN to go back to the main menu')
+    while True:
+        name = input('Enter the name to load: ')
+        if name == 'RETURN':
+            return False
+        elif name.isdigit() or not name.isalpha():
+            print('Please enter a valid name (a single word containing only letters)')
+        else:
+            if player.load_player(name):
+                print(f'Welcome back {name}')
+                break
+            else:
+                return False
+    return True
 
 
 def instructions():
@@ -76,11 +92,13 @@ def menu(user: 'characters.PC', place: 'area.Area'):
     for e in exits:
         print(f"'{e}'", end=',')
     print('\b)')
-    print("\tOther commands: 'q' - Quit")
-    cmd = input('\tEnter a command: ')
+    print("\tOther commands: 'quit', 'save'")
+    cmd = (input('\tEnter a command: ')).lower()
     if cmd in exits:
         user.move(cmd)
-    elif cmd == 'q':
+    elif cmd == 'save':
+        player.save_player()
+    elif cmd == 'q' or cmd == 'quit':
         exit()
 
 

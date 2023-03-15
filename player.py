@@ -6,42 +6,87 @@
 import characters
 from json import loads, dumps
 
-player = None
+player = characters.PC('user', 0, 0)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ~~~~~~ Create or load player data               ~~~~~
+# ~~~~~~ Create new player data                ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def new_player(name: str):
     global player
-    player = characters.PC(name, 0, 0)
+    player = characters.PC(name, 5, 5)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ~~~~~~ Save player                           ~~~~~
+# ~~~~~~ Load player data                      ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def save_player(p: characters.PC):
+def load_player(name: str) -> bool:
+    global player
     try:
-        f = open("player.txt", "wt")
-        temp = loads(f.read())
-        if temp.has_key(p.name):
-            cmd = ''
-            print('That character file already exists.')
-            cmd = input(f'Do you want to overwrite {p.name}? [Y/N] ').lower()
-            while cmd != 'n' and cmd != 'y':
-                print('Please enter a valid option')
-                cmd = input(f'Do you want to overwrite {p.name}? [Y/N] ').lower()
-            if cmd == 'n':
-                return
+        file = open('player.txt', 'rt')
         try:
-            temp[p.name] = player
-            f.write(temp)
+            temp = file.read()
+            load_data = loads(temp)
+            if name not in load_data:
+                print('There is no record of that character.')
+                file.close()
+                return False
+            player.load(load_data[name])
+            print('Successfully loaded save data')
+            file.close()
+            return True
+        except OSError:
+            print('Unable to read save file')
+            file.close()
+            return False
+    except OSError:
+        print('Unable to load save data')
+        return False
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~ Save player data                      ~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def save_player():
+    global player
+    file = None
+    save_data = dict()
+    try:
+        file = open("player.txt", "rt")
+        try:
+            temp = file.read()
+            if len(temp) > 0:
+                save_data = loads(temp)
+                if player.name in save_data:
+                    print('That character file already exists.')
+                    cmd = input(f'Do you want to overwrite {player.name}? [Y/N] ').lower()
+                    while cmd != 'n' and cmd != 'y':
+                        print('Please enter a valid option')
+                        cmd = input(f'Do you want to overwrite {player.name}? [Y/N] ').lower()
+                    if cmd == 'n':
+                        return
+        except OSError:
+            print('Unable to validate save file')
+            file.close()
+            return
+    except OSError:
+        print('Unable to open save file for reading')
+        file.close()
+        return
+    try:
+        file = open('player.txt', 'wt')
+        try:
+            save_data[player.name] = player.__dict__
+            file.write(dumps(save_data))
+            print('Save successful')
+            file.close()
+            return
         except OSError:
             print('Unable to write to save file')
+            file.close()
             return
     except OSError:
         print('Unable to find or create save file')
+        file.close()
         return
-    finally:
-        f.close()
 

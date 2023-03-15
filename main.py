@@ -8,7 +8,9 @@ Created on Sat Mar 11 13:17:52 2023
 import characters
 import area
 import menu
+import player
 from os import system
+
 
 width = height = 10
 
@@ -21,18 +23,18 @@ for x in range(width):
 all_creatures = list()
 
 place = area.Area(width, height, walls)
-person = characters.PC('User', width//2, height//2)
-all_creatures.append(person)
 all_creatures.append(characters.Mob(3, 3))
 all_creatures.append(characters.Mob(4, 3))
 
 
 def __main__():
+    menu.start_menu()
+    all_creatures.append(player.player)
     while True:
         system('cls')
         print('\n\n\n')
         place.show(all_creatures)
-        menu.menu(person, place)
+        menu.menu(player.player, place)
         for c in all_creatures:
             if type(c) is characters.Mob:
                 c.move(place.exits(c.loc_x, c.loc_y))
