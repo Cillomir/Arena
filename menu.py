@@ -92,12 +92,14 @@ def menu(user: 'characters.PC', place: 'area.Area'):
     for e in exits:
         print(f"'{e}'", end=',')
     print('\b)')
-    print("\tOther commands: 'quit', 'save'")
+    print("\tOther commands: 'quit', 'save', 'stats'")
     cmd = (input('\tEnter a command: ')).lower()
     if cmd in exits:
         user.move(cmd)
     elif cmd == 'save':
         player.save_player()
+    elif cmd == 'stats':
+        player.see_stats()
     elif cmd == 'q' or cmd == 'quit':
         exit()
 

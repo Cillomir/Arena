@@ -90,3 +90,6 @@ def save_player():
         file.close()
         return
 
+
+def see_stats():
+    pass
