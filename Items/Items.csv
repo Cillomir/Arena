@@ -1,0 +1,4 @@
+name,type,stat,boost
+Sword,weapon,STR,1
+Bow,weapon,STR,1
+Shield,off-hand,DEX,1

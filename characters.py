@@ -7,6 +7,7 @@ Created on Sat Mar 11 13:22:10 2023
 
 
 import random
+import Items.items
 
 
 class Character:
@@ -17,6 +18,7 @@ class Character:
         self.dex = dexterity
         self.loc_x = loc_x
         self.loc_y = loc_y
+        self.weapon = 'sword'
 
 
 class PC(Character):

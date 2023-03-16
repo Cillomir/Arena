@@ -68,11 +68,10 @@ def save_player():
         except OSError:
             print('Unable to validate save file')
             file.close()
-            return
+        except FileNotFoundError:
+            print('Unable to find existing file')
     except OSError:
         print('Unable to open save file for reading')
-        file.close()
-        return
     try:
         file = open('player.txt', 'wt')
         try:
