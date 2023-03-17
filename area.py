@@ -7,6 +7,7 @@ Created on Sat Mar 11 13:29:32 2023
 
 
 import characters
+import player
 import colors
 
 
@@ -17,7 +18,7 @@ class Area:
         self.walls = walls
     
     def show(self, creatures: 'list[characters.Character]'):
-        character = [(c.loc_x, c.loc_y) for c in creatures if type(c) is characters.PC]
+        character = [(c.loc_x, c.loc_y) for c in creatures if type(c) is player.PC]
         mobiles = [(c.loc_x, c.loc_y) for c in creatures if type(c) is characters.Mob]
 
         for y in range(self.height):

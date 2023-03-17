@@ -3,10 +3,47 @@
 # by Joel Leckie
 # File created: 2023-03-14
 
-import characters
+from characters import Character
 from json import loads, dumps
+from os import system
 
-player = characters.PC('user', 0, 0)
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~ Create new player data                ~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+class PC(Character):
+    def __init__(self, name: 'str', loc_x: 'int', loc_y: 'int'):
+        super().__init__(name, loc_x, loc_y, 20, 6, 5)
+        self.inventory = list()
+
+    def load(self, player: 'dict'):
+        for key in player:
+            setattr(self, key, player[key])
+
+    def move(self, direction: 'chr'):
+        if direction == 'n':
+            self.loc_y -= 1
+        elif direction == 's':
+            self.loc_y += 1
+        elif direction == 'w':
+            self.loc_x -= 1
+        elif direction == 'e':
+            self.loc_x += 1
+
+    def see_stats(self):
+        system('cls')
+        print(f'Name: {self.name} {" " * (20 - len(self.name))} Location: ({self.loc_x}, {self.loc_y})')
+        print(f'\nHealth: {self.health}')
+        print(f'\nStrength: {self.str}')
+        print(f'Dexterity: {self.dex}')
+        print(f'\nWeapon: {self.weapon}')
+
+    def see_inventory(self):
+        for x in self.inventory:
+            print(x.name)
+
+
+player = PC('user', 0, 0)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -14,7 +51,7 @@ player = characters.PC('user', 0, 0)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def new_player(name: str):
     global player
-    player = characters.PC(name, 5, 5)
+    player = PC(name, 5, 5)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,7 +125,3 @@ def save_player():
         print('Unable to find or create save file')
         file.close()
         return
-
-
-def see_stats():
-    pass
