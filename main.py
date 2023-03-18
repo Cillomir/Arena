@@ -11,7 +11,7 @@ import menu
 import player
 from time import sleep
 import random
-from threading import Timer
+import ticker
 from os import system
 
 width = height = 10
@@ -32,23 +32,24 @@ all_creatures.append(characters.Mob(4, 3))
 def __main__():
     menu.start_menu()
     all_creatures.append(player.player)
-    ticker.start()
-    global ticker_running
+    tick.start()
+    #ticker.start()
+    #global ticker_running
     while True:
         system('cls')
         print('\n\n\n')
-        ticker_running = False
+        #ticker_running = False
         place.show(all_creatures)
-        ticker_running = True
+        #ticker_running = True
         if menu.menu(player.player, place):
             print("Quitting...")
-            ticker.cancel()
+            tick.cancel()
             exit()
-        for c in all_creatures:
-            if type(c) is characters.Mob and random.randint(0, tick_count % 20) == 0:
-                c.move(place.exits(c.loc_x, c.loc_y))
+        #for c in all_creatures:
+            #if type(c) is characters.Mob and random.randint(0, tick_count % 20) == 0:
+                #c.move(place.exits(c.loc_x, c.loc_y))
 
-
+'''
 def tick_event():
     global tick_count
     while True:
@@ -60,10 +61,18 @@ def tick_event():
             tick_count += 1
         except:
             print("General error")
+'''
 
 
-ticker = Timer(5, tick_event)
-tick_count = 1
-ticker_running = True
+def timer_tick():
+    for c in all_creatures:
+        if type(c) is characters.Mob and random.randint(0, 20) == 0:
+            c.move(place.exits(c.loc_x, c.loc_y))
+
+
+tick = ticker.Scheduler(5, timer_tick)
+#ticker = Timer(5, tick_event)
+#tick_count = 1
+#ticker_running = True
 
 __main__()

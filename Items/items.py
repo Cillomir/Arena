@@ -1,7 +1,9 @@
-# CMPE2850 - Programming Languages
-# ICA -
-# by jleckie1
-# File created: 3/16/2023
+# -*- coding: utf-8 -*-
+"""
+@author: Joel Leckie
+
+Created on 3/16/2023
+"""
 
 import random
 items = list()
@@ -9,7 +11,7 @@ items = list()
 
 def init():
     try:
-        f = open('Items.csv', 'rt')
+        f = open('Items.Items.csv', 'rt')
         global items
         row = 0
         for i in f:

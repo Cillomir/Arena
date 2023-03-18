@@ -86,7 +86,7 @@ def settings():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~ In-Game Menu                           ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def menu(user: 'characters.PC', place: 'area.Area'):
+def menu(user: 'player.PC', place: 'area.Area'):
     exits = place.exits(user.loc_x, user.loc_y)
     print('\n\tAvailable exits (', end='')
     for e in exits:

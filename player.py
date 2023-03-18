@@ -1,7 +1,10 @@
-# CMPE2850 - Programming Languages
-# ICA0 - Name
-# by Joel Leckie
-# File created: 2023-03-14
+# -*- coding: utf-8 -*-
+"""
+@author: Joel Leckie
+
+Created on  2023-03-14
+"""
+
 
 from characters import Character
 from json import loads, dumps

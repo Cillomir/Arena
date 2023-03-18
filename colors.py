@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+@author: Joel Leckie
+
+Created on Sat Mar 11 13:17:52 2023
+"""
+
+
+# Color codes as per colorama online guide
 import colorama
 colorama.init()
 

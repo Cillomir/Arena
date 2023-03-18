@@ -7,7 +7,8 @@ Created on Sat Mar 11 13:22:10 2023
 
 
 import random
-import Items.items
+import Items.items as it
+it.init()
 
 
 class Character:
@@ -21,12 +22,11 @@ class Character:
         self.weapon = 'sword'
 
 
-
-
-
 class Mob(Character):
     def __init__(self, loc_x: 'int', loc_y: 'int'):
         super().__init__('Rando', loc_x, loc_y, 10, 5, 4)
+        self.inventory = list()
+        self.inventory.append(it.items[random.randint(0, len(it.items)-1)])
 
     def move(self, exits: 'list[str]'):
         direction = random.choice(exits)
