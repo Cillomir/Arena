@@ -83,7 +83,7 @@ class PC(Character):
                 print(f'In your {container.name} you have:')
                 print(colors.Fore.cyan)
                 for i in container.contents:
-                    print(i.name)
+                    print(colors.Fore.cyan, i.name)
                 print(colors.Effect.reset)
                 print(f'It has {len(container.contents)} of {container.size} items in it.')
         input("\nPress ENTER to continue...")
