@@ -24,6 +24,11 @@ for x in range(width):
 all_creatures = list()
 
 place = area.Area(width, height, walls)
+arena = list()
+for x in range(place.width):
+    for y in range(place.height):
+        if (x, y) not in place.walls:
+            arena.append((x, y))
 all_creatures.append(characters.Mob(3, 3))
 all_creatures.append(characters.Mob(4, 3))
 
@@ -38,7 +43,7 @@ def __main__():
         place.show(all_creatures)
         if menu.menu(player.player, place):
             print("Quitting...")
-            tick.cancel()
+            tick.stop()
             exit()
 
 
@@ -47,8 +52,17 @@ def timer_tick():
         if type(c) is characters.Mob and random.randint(0, 30 - tick.count % 30) <= 5:
             c.move(place.exits(c.loc_x, c.loc_y))
             tick.count = 0
+    if len([c for c in all_creatures if type(c) is characters.Mob]) < 2:
+        if tick.mob_count >= 100 and random.randint(0, 120 - tick.mob_count) < 5:
+            rooms = [loc for loc in arena if loc != (player.player.loc_x, player.player.loc_y)]
+            room = rooms[random.choice(rooms)]
+            all_creatures.append(characters.Mob(room[0], room[1]))
+            tick.mob_count = 0
+        else:
+            tick.mob_count += 1
 
 
 tick = ticker.Scheduler(1, timer_tick)
+tick.mob_count = 0
 
 __main__()
