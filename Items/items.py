@@ -61,6 +61,7 @@ class Container(Item):
         Item.__init__(self, name, 'Container', None, None)
         self.size = size
         self.kind = kind
+        self.contents = list()
 
 
 class CoinPouch(Container):

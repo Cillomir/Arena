@@ -6,6 +6,7 @@ Created on  2023-03-14
 """
 
 
+import colors
 from characters import Character
 from Items.items import Item, Weapon, Armor, OffHand, Wearable, Container, CoinPouch
 from json import loads, dumps
@@ -63,16 +64,28 @@ class PC(Character):
         print('Nothing' if self.equipment["Hands"] is None else self.equipment["Hands"].name)
         print(f'Feet:      ', end='')
         print('Nothing' if self.equipment["Feet"] is None else self.equipment["Feet"].name)
-        input("Press ENTER to continue...")
+        input("\nPress ENTER to continue...")
 
     def see_inventory(self):
         print()
         for x in self.inventory:
             print(x.name)
-        input("Press ENTER to continue...")
+        input("\nPress ENTER to continue...")
 
-    def look_inside(self):
-        pass
+    def look_inside(self, container: Container or CoinPouch):
+        if type(container) is CoinPouch:
+            print(f'\nIn your {container.name} you have:')
+            print(f'{container.gold} gold pieces, {container.silver} silver pieces, {container.copper} copper pieces')
+        else:
+            if len(container.contents) == 0:
+                print(f'Your {container.name} is empty. It can hold {container.size} items.')
+            else:
+                print(f'In your {container.name} you have:')
+                print(colors.Fore.cyan)
+                for i in container.contents:
+                    print(i.name)
+                print(colors.Effect.reset)
+                print(f'It has {len(container.contents)} of {container.size} items in it.')
 
     def wear_item(self):
         pass

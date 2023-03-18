@@ -53,7 +53,7 @@ def new_game() -> bool:
         elif name.isdigit() or not name.isalpha():
             print('Please enter a valid name (a single word containing only letters)')
         else:
-            name[0] = name[0].upper()
+            name = name[0].upper() + name[1:].lower()
             print(f'Welcome {name}')
             break
     player.new_player(name)
@@ -70,7 +70,7 @@ def load_game():
         elif name.isdigit() or not name.isalpha():
             print('Please enter a valid name (a single word containing only letters)')
         else:
-            name[0] = name[0].upper()
+            name = name[0].upper() + name[1:].lower()
             if player.load_player(name):
                 print(f'Welcome back {name}')
                 break
@@ -109,12 +109,14 @@ def menu(user: 'player.PC', place: 'area.Area'):
         cmd = 'w'
     if cmd in exits:
         user.move(cmd)
-    elif cmd == "sav" or cmd == 'save':
-        player.save_player()
+    elif cmd == 'gold' or cmd == 'silver' or cmd == 'copper' or cmd == 'coin' or cmd == 'money':
+        user.look_inside(user.inventory[1])
     elif cmd == 'st' or cmd == 'stat' or cmd == 'stats':
         player.player.see_stats()
     elif cmd == 'inv' or cmd == 'inventory':
         player.player.see_inventory()
+    elif cmd == "sav" or cmd == 'save':
+        player.save_player()
     elif cmd == 'q' or cmd == 'qu' or cmd == 'quit':
         return True
     return False
