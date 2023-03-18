@@ -1,4 +1,26 @@
 name,type,stat,boost
-Sword,weapon,STR,1
-Bow,weapon,STR,1
-Shield,off-hand,DEX,1
+Iron Dagger,weapon,STR,1
+Iron Short Sword,weapon,STR,1
+Iron Long Sword,weapon,STR,1
+Iron Great Sword,weapon,STR,1
+Steel Dagger,weapon,STR,2
+Steel Short Sword,weapon,STR,2
+Steel Long Sword,weapon,STR,2
+Steel Great Sword,weapon,STR,2
+Short Bow,weapon,STR,1
+Long Bow,weapon,STR,1
+Composite Short Bow,weapon,STR,2
+Composite Long Bow,weapon,STR,2
+Wood Buckler,off-hand,DEX,1
+Wood Kite Shield,off-hand,DEX,1
+Wood Round,off-hand,DEX,1
+Wood Heater,off-hand,DEX,1
+Iron Buckler,off-hand,DEX,2
+Iron Kite Shield,off-hand,DEX,2
+Iron Round,off-hand,DEX,2
+Iron Heater,off-hand,DEX,2
+Leather Gambeson,armor,DEF,1
+Iron Gambeson,armor,DEF,2
+Steel Gambeson,armor,DEF,3
+Leather Boots,feet,DEX,1
+Leather Gloves,hands,STR,1

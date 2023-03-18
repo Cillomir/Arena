@@ -1,1 +1,0 @@
-{"Joel": {"name": "Joel", "health": 20, "str": 6, "dex": 5, "loc_x": 3, "loc_y": 6, "weapon": "sword", "inventory": []}, "Sherwin": {"name": "Sherwin", "health": 20, "str": 6, "dex": 5, "loc_x": 5, "loc_y": 5, "weapon": "sword"}}

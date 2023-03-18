@@ -7,6 +7,7 @@ Created on  2023-03-14
 
 
 from characters import Character
+from Items.items import Item
 from json import loads, dumps
 from os import system
 
@@ -18,6 +19,11 @@ class PC(Character):
     def __init__(self, name: 'str', loc_x: 'int', loc_y: 'int'):
         super().__init__(name, loc_x, loc_y, 20, 6, 5)
         self.inventory = list()
+        self.inventory.append(Item('Training Sword', 'weapon', 'STR', '0'))
+        self.inventory.append(Item('Padded Gambeson', 'armor', 'DEF', '0'))
+        self.inventory.append(Item('Leather Shoes', 'feet', 'DEX', '0'))
+        self.inventory.append(Item('Leather Pouch', 'container', 'Contents', '8'))
+        self.inventory.append(Item('Coin Purse', 'container', 'Contents', '8'))
 
     def load(self, player_data: 'dict'):
         for key in player_data:

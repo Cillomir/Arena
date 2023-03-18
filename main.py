@@ -66,11 +66,11 @@ def tick_event():
 
 def timer_tick():
     for c in all_creatures:
-        if type(c) is characters.Mob and random.randint(0, 20) == 0:
+        if type(c) is characters.Mob and random.randint(0, 20) <= 10:
             c.move(place.exits(c.loc_x, c.loc_y))
 
 
-tick = ticker.Scheduler(5, timer_tick)
+tick = ticker.Scheduler(2, timer_tick)
 #ticker = Timer(5, tick_event)
 #tick_count = 1
 #ticker_running = True

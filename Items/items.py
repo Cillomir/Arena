@@ -24,20 +24,58 @@ def init(path='Items.csv'):
         print(f'Unable to open items file: {er}')
 
 
+class Item:
+    """ General item category """
+    def __init__(self, name, category, stat, boost):
+        self.name = name
+        self.category = category
+        self.stat = stat
+        self.boost = boost
+
+
+class Weapon(Item):
+    def __init__(self, name, boost):
+        Item.__init__(self, name, 'Weapon', 'ATK', boost)
+
+
+class Armor(Item):
+    def __init__(self, name, boost):
+        Item.__init__(self, name, 'Armor', 'DEF', boost)
+
+
+class OffHand(Item):
+    def __init__(self, name, boost):
+        Item.__init__(self, name, 'Off-Hand', 'DEF', boost)
+
+
+class Wearable(Item):
+    def __init__(self, name, location, stat, boost):
+        Item.__init__(self, name, 'Wearable', stat, boost)
+        self.location = location
+
+
+class Container(Item):
+    def __init__(self, name, size, kind):
+        Item.__init__(self, name, 'Container', None, None)
+        self.size = size
+        self.kind = kind
+
+
+class CoinPouch(Container):
+    def __init__(self, name, size):
+        Container.__init__(self, name, size, 'Money')
+        self.gold = 0
+        self.silver = 0
+        self.copper = 0
+        self.total = self.gold + self.silver + self.copper
+
 def check_items():
+    """ For testing item information and parsing"""
     for x in items:
         print(vars(x))
         for y in [a for a in dir(x) if a[:2] != '__']:
             print(y, end=', ')
         print('\b\b')
-
-
-class Item:
-    def __init__(self, name, cat, stat, boost):
-        self.name = name
-        self.category = cat
-        self.stat = stat
-        self.boost = boost
 
 
 if __name__ == '__main__':
