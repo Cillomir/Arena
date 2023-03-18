@@ -45,3 +45,9 @@ class Area:
         if (loc_x + 1, loc_y) not in self.walls:
             directions.append('e')
         return directions
+
+    def creatures(self, loc_x: 'int', loc_y: 'int'):
+        pass
+
+    def objects(self, loc_x: 'int', loc_y: 'int'):
+        pass

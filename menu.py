@@ -47,11 +47,13 @@ def new_game() -> bool:
     print('\n\tType RETURN to go back to the main menu')
     while True:
         name = input('Enter your name, adventurer: ')
+        name = name.strip()
         if name == 'RETURN':
             return False
         elif name.isdigit() or not name.isalpha():
             print('Please enter a valid name (a single word containing only letters)')
         else:
+            name[0] = name[0].upper()
             print(f'Welcome {name}')
             break
     player.new_player(name)
@@ -62,11 +64,13 @@ def load_game():
     print('\n\tType RETURN to go back to the main menu')
     while True:
         name = input('Enter the name to load: ')
+        name = name.strip()
         if name == 'RETURN':
             return False
         elif name.isdigit() or not name.isalpha():
             print('Please enter a valid name (a single word containing only letters)')
         else:
+            name[0] = name[0].upper()
             if player.load_player(name):
                 print(f'Welcome back {name}')
                 break
@@ -92,18 +96,26 @@ def menu(user: 'player.PC', place: 'area.Area'):
     for e in exits:
         print(f"'{e}'", end=',')
     print('\b)')
-    print("\tOther commands: 'quit', 'save', 'stats', 'inventory'")
+    print("\tOther commands: 'stats', 'inventory', 'save', 'quit'")
     cmd = input('\tEnter a command: ')
-    cmd = cmd.lower()
+    cmd = cmd.lower().strip()
+    if cmd == 'south' or cmd == 'sout' or cmd == 'sou':
+        cmd = 's'
+    elif cmd == 'north' or cmd == 'nort' or cmd == 'nor':
+        cmd = 'n'
+    elif cmd == 'east' or cmd == 'eas':
+        cmd = 'e'
+    elif cmd == 'west' or cmd == 'wes':
+        cmd = 'w'
     if cmd in exits:
         user.move(cmd)
-    elif cmd == 'save':
+    elif cmd == "sav" or cmd == 'save':
         player.save_player()
     elif cmd == 'st' or cmd == 'stat' or cmd == 'stats':
         player.player.see_stats()
     elif cmd == 'inv' or cmd == 'inventory':
         player.player.see_inventory()
-    elif cmd == 'q' or cmd == 'quit':
+    elif cmd == 'q' or cmd == 'qu' or cmd == 'quit':
         return True
     return False
 

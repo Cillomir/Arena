@@ -31,6 +31,8 @@ class Item:
         self.category = category
         self.stat = stat
         self.boost = boost
+        self.loc_x = -1
+        self.loc_y = -1
 
 
 class Weapon(Item):

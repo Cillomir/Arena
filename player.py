@@ -63,11 +63,19 @@ class PC(Character):
         print('Nothing' if self.equipment["Hands"] is None else self.equipment["Hands"].name)
         print(f'Feet:      ', end='')
         print('Nothing' if self.equipment["Feet"] is None else self.equipment["Feet"].name)
+        input("Press ENTER to continue...")
 
     def see_inventory(self):
         print()
         for x in self.inventory:
             print(x.name)
+        input("Press ENTER to continue...")
+
+    def look_inside(self):
+        pass
+
+    def wear_item(self):
+        pass
 
 
 player = PC('user', 0, 0)
