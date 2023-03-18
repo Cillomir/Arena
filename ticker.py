@@ -15,11 +15,13 @@ class Scheduler:
         self.tim = tim
         self.function = function
         self.thread = Timer(self.tim, self.handle_function)
+        self.count = 0
 
     def handle_function(self):
         self.function()
         self.thread = Timer(self.tim, self.handle_function)
         self.thread.start()
+        self.count += 1
 
     def start(self):
         self.thread.start()

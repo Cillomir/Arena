@@ -7,7 +7,7 @@ Created on  2023-03-14
 
 
 from characters import Character
-from Items.items import Item
+from Items.items import Item, Weapon, Armor, OffHand, Wearable, Container, CoinPouch
 from json import loads, dumps
 from os import system
 
@@ -19,11 +19,17 @@ class PC(Character):
     def __init__(self, name: 'str', loc_x: 'int', loc_y: 'int'):
         super().__init__(name, loc_x, loc_y, 20, 6, 5)
         self.inventory = list()
-        self.inventory.append(Item('Training Sword', 'weapon', 'STR', '0'))
-        self.inventory.append(Item('Padded Gambeson', 'armor', 'DEF', '0'))
-        self.inventory.append(Item('Leather Shoes', 'feet', 'DEX', '0'))
-        self.inventory.append(Item('Leather Pouch', 'container', 'Contents', '8'))
-        self.inventory.append(Item('Coin Purse', 'container', 'Contents', '8'))
+        self.equipment = dict()
+        self.equipment['Weapon'] = Weapon('Training Sword', 0)
+        self.equipment['Off-Hand'] = None
+        self.equipment['Armor'] = Armor('Padded Gambeson', 0)
+        self.equipment['Head'] = None
+        self.equipment['Hands'] = None
+        self.equipment['Feet'] = Wearable('Leather Shoes', 'Feet', 'DEX', 0)
+        self.inventory.append(Container('Leather Pouch', 8, 'Shoulder'))
+        self.inventory.append(CoinPouch('Coin Purse', 8))
+        self.inventory[-1].copper = 10
+        self.inventory[-1].silver = 5
 
     def load(self, player_data: 'dict'):
         for key in player_data:
@@ -41,13 +47,25 @@ class PC(Character):
 
     def see_stats(self):
         system('cls')
-        print(f'Name: {self.name} {" " * (20 - len(self.name))} Location: ({self.loc_x}, {self.loc_y})')
+        print(f'\nName: {self.name} {" " * (20 - len(self.name))} Location: ({self.loc_x}, {self.loc_y})')
         print(f'\nHealth: {self.health}')
         print(f'\nStrength: {self.str}')
         print(f'Dexterity: {self.dex}')
-        print(f'\nWeapon: {self.weapon}')
+        print(f'\nWeapon:  ', end='')
+        print('Nothing' if self.equipment["Weapon"] is None else self.equipment["Weapon"].name)
+        print(f'Off-Hand:  ', end='')
+        print('Nothing' if self.equipment["Off-Hand"] is None else self.equipment["Off-Hand"].name)
+        print(f'Armor:     ', end='')
+        print('Nothing' if self.equipment["Armor"] is None else self.equipment["Armor"].name)
+        print(f'Head:      ', end='')
+        print('Nothing' if self.equipment["Head"] is None else self.equipment["Head"].name)
+        print(f'Hands:     ', end='')
+        print('Nothing' if self.equipment["Hands"] is None else self.equipment["Hands"].name)
+        print(f'Feet:      ', end='')
+        print('Nothing' if self.equipment["Feet"] is None else self.equipment["Feet"].name)
 
     def see_inventory(self):
+        print()
         for x in self.inventory:
             print(x.name)
 
@@ -126,6 +144,9 @@ def save_player():
             print('Save successful')
             file.close()
             return
+        except TypeError:
+            print('Unable to convert player data to save data')
+            file.close()
         except OSError:
             print('Unable to write to save file')
             file.close()
