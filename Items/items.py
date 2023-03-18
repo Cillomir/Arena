@@ -9,9 +9,9 @@ import random
 items = list()
 
 
-def init():
+def init(path='Items.csv'):
     try:
-        f = open('Items.csv', 'rt')
+        f = open(path, 'rt')
         global items
         row = 0
         for i in f:

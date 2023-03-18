@@ -8,7 +8,7 @@ Created on Sat Mar 11 13:22:10 2023
 
 import random
 import Items.items as it
-it.init()
+it.init('Items/Items.csv')
 
 
 class Character:
