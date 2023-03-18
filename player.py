@@ -52,7 +52,7 @@ class PC(Character):
         print(f'\nHealth: {self.health}')
         print(f'\nStrength: {self.str}')
         print(f'Dexterity: {self.dex}')
-        print(f'\nWeapon:  ', end='')
+        print(f'\nWeapon:    ', end='')
         print('Nothing' if self.equipment["Weapon"] is None else self.equipment["Weapon"].name)
         print(f'Off-Hand:  ', end='')
         print('Nothing' if self.equipment["Off-Hand"] is None else self.equipment["Off-Hand"].name)
@@ -86,6 +86,7 @@ class PC(Character):
                     print(i.name)
                 print(colors.Effect.reset)
                 print(f'It has {len(container.contents)} of {container.size} items in it.')
+        input("\nPress ENTER to continue...")
 
     def wear_item(self):
         pass

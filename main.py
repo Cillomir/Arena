@@ -29,8 +29,10 @@ for x in range(place.width):
     for y in range(place.height):
         if (x, y) not in place.walls:
             arena.append((x, y))
-all_creatures.append(characters.Mob(3, 3))
-all_creatures.append(characters.Mob(4, 3))
+room = random.choice(arena)
+all_creatures.append(characters.Mob(room[0], room[1]))
+room = random.choice(arena)
+all_creatures.append(characters.Mob(room[0], room[1]))
 
 
 def __main__():
