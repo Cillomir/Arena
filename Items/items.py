@@ -11,7 +11,7 @@ items = list()
 
 def init():
     try:
-        f = open('Items.Items.csv', 'rt')
+        f = open('Items.csv', 'rt')
         global items
         row = 0
         for i in f:
@@ -20,9 +20,16 @@ def init():
                 continue
             item = i.split(",")
             items.append(Item(item[0], item[1], item[2], item[3]))
-        print(items)
     except FileNotFoundError as er:
         print(f'Unable to open items file: {er}')
+
+
+def check_items():
+    for x in items:
+        print(vars(x))
+        for y in [a for a in dir(x) if a[:2] != '__']:
+            print(y, end=', ')
+        print('\b\b')
 
 
 class Item:
@@ -35,3 +42,4 @@ class Item:
 
 if __name__ == '__main__':
     init()
+    check_items()

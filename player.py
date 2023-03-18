@@ -19,9 +19,9 @@ class PC(Character):
         super().__init__(name, loc_x, loc_y, 20, 6, 5)
         self.inventory = list()
 
-    def load(self, player: 'dict'):
-        for key in player:
-            setattr(self, key, player[key])
+    def load(self, player_data: 'dict'):
+        for key in player_data:
+            setattr(self, key, player_data[key])
 
     def move(self, direction: 'chr'):
         if direction == 'n':
