@@ -13,6 +13,9 @@ from json import loads, dumps
 from os import system
 
 
+# Class Skills
+# Rage, Bloodthirst, Herald Death, Snipe
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~ Create new player data                ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,21 +38,109 @@ class PC(Character):
         self.resist += {'toxin': 0, 'poison': 0, 'light': 0, 'dark': 0, 'disease': 0}
         # Other Stats (?): Reputation, Luck, Charm/Poise, Knowledge, Personality
         # Other Stats (?): Sanity, Courage, Constitution, Balance, Vitality
-        # Skills: Stealth,
+        self.pc_class = None
+        self.pc_abilities = None
         # Weapon & Armor Skills:
         self.skill_weapon = {'dagger': 5, 'sword': 0, 'axe': 0, 'hammer': 0, 'staff': 5}
-        self.skill_weapon += {'spear': 0, 'polearm': 0, 'whip': 0, 'flail': 0, 'exotic': 0}
+        self.skill_weapon += {'spear': 0, 'polearm': 0, 'lance': 0, 'whip': 0, 'flail': 0}
         self.skill_weapon += {'dart': 0, 'thrown': 0, 'bow': 0, 'crossbow': 0}
-        self.skill_weapon += {'stave': 0, 'wand': 0, 'scroll': 0}
+        self.skill_weapon += {'stave': 0, 'wand': 0, 'scroll': 0, 'magic items': 0}
+        self.skill_exotic = {'hook': 0, 'scythe': 0, 'sickle': 0}
         self.skill_armor = {'shield': 0, 'light': 0, 'medium': 0, 'heavy': 0}
         # Combat Skills:
         self.skills_attacks = {'second': 0, 'third': 0, 'fourth': 0, 'fifth': 0}
-        self.skills_combat = {'hand-to-hand': 0, 'enhance damage': 0}
-        self.skills_combat += {'kick', 'bash', 'sweep', ''}
+        self.skills_combat = {'hand-to-hand': 0, 'blind-fighting': 0, 'martial-arts': 0, 'enhance damage': 0}
+        self.skills_combat += {'kick': 0, 'bash': 0, 'sweep': 0, 'charge': 0}
         # Defense Skills:
         self.skill_defense = {'parry': 0, 'dodge': 5, 'block': 0}
+        self.skill_defense += {'second defence': 0}
         # Technical Skills:
-        self.skill_technical = {'fast healing': 0, 'perception': 0}
+        self.skill_technical = {'stealth': 0, 'sneak':0, 'hide': 0, 'scan': 0, 'meditation': 0}
+        self.skill_technical += {'acrobatics': 0, 'athletics': 0}
+        self.skill_technical += {'herbalism': 0, 'scribe': 0}
+        self.skill_passive = {'fast healing': 0, 'perception': 0, 'riding': 0}
+        self.skill_passive += {'knowledge': 0, 'lore': 0}
+        # Mystic Spells:
+        self.spell_mystic = {'lay on hands': 0}
+        # Abjuration Spells
+        # Counterspell 	Cure Disease 	Cure Poison 	Protection From Evil
+        # Remove Curse 	Sanctify 	Sanctuary 	Searing Touch
+        # Spell Shield
+        # Alteration Spells
+        # Calm 	Cure Blindness 	Cure Critical 	Cure Light
+        # Erase 	Refresh 	Resurrect
+        # Enchantment Spells
+        # Consecrate Armor 	Consecrate Food 	Consecrate Weapon
+        # Illusion Spells
+        # Light
+        # Invocation Spells
+        # Bless
+        # Divination Spells
+        # Detect Alignment
+        # Conjuration Spells
+        # Aegis 	Armor 	Create Food 	Create Spring
+        # Create Water
+        # Abjuration
+        # Abjure 	Counterspell 	Dispel Area 	Dispel Magic
+        # Room Shield 	Silence
+        # Alteration
+        # Change Sex 	Death Grip 	Erase 	Flame Wind
+        # Haste 	Infravision 	Lava Walk 	Magic Lock
+        # Magic Unlock 	Pass Door 	Poison 	Shocking Grasp
+        # Spark 	Stone Skin 	Thunderclap 	Underwater Breathing
+        # Unnatural Strength 	Weaken
+        # Summoning
+        # Blink 	Control Winds 	Ice Storm 	Summon Elemental
+        # Teleport 	Thunderstorm
+        # Enchantment
+        # Beacon 	Charm 	Curse 	Levitation
+        # Overpressurize 	Recharge Item 	Sleep
+        # Illusion
+        # Blindness 	Color Spray 	Invisibility 	Light
+        # Momentary Darkness
+        # Evocation
+        # Shield
+        # Divination
+        # Detect Illusion 	Detect Invisibility 	Detect Magic 	Identify
+        # Sense Life 	Wizard Eye
+        # Necromancy
+        # Animate Dead 	Energy Drain 	Enervation 	Kill
+        # Plague 	Slow
+        # Conjuration
+        # Acid Blast 	Armor 	Circle Of Fire 	Concentration
+        # Fireball 	Frost 	Hands Of Wind 	Ice Wind
+        # Iceball 	Lightning Bolt 	Magic Bomb 	Magic Dart
+        # Magic Message 	Web
+        # Chaos
+        # Gate Travel 	Nexus 	Plane Travel 	Slow Magic
+        # Abjuration
+        # Abjure 	Counterspell 	Cure Disease 	Cure Poison
+        # Dispel Magic 	Protection From Evil 	Protection From Good 	Remove Curse
+        # Sanctuary 	Silence 	Spell Shield 	Tremor
+        # Alteration
+        # Calm 	Change Sex 	Cure Blindness 	Cure Light
+        # Cure Serious 	Erase 	Poison 	Resurrect
+        # Spark
+        # Summoning
+        # Blink 	Combat Blink
+        # Enchantment
+        # Curse 	Faerie Fire 	Mental Clarity 	Multiply Magic
+        # Recharge Item
+        # Illusion
+        # Blindness 	Light
+        # Invocation
+        # Bless
+        # Divination
+        # Detect Alignment 	Detect Illusion 	Detect Invisibility 	Detect Magic
+        # Identify 	Remote Sensing 	Sense Life
+        # Necromancy
+        # Animate Dead 	Cause Light 	Cause Serious 	Plague
+        # Slow
+        # Conjuration
+        # Armor 	Hands Of Wind 	Phalanx
+        # Chaos
+        # Slow Magic
+
 
         self.inventory = list()
         self.equipment = dict()
