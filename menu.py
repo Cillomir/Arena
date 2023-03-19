@@ -99,27 +99,94 @@ def menu(user: 'player.PC', place: 'area.Area'):
     print("\tOther commands: 'stats', 'inventory', 'save', 'quit'")
     cmd = input('\tEnter a command: ')
     cmd = cmd.lower().strip()
-    if cmd == 'south' or cmd == 'sout' or cmd == 'sou':
-        cmd = 's'
-    elif cmd == 'north' or cmd == 'nort' or cmd == 'nor':
-        cmd = 'n'
-    elif cmd == 'east' or cmd == 'eas':
-        cmd = 'e'
-    elif cmd == 'west' or cmd == 'wes':
-        cmd = 'w'
-    if cmd in exits:
-        user.move(cmd)
-    elif cmd == 'gold' or cmd == 'silver' or cmd == 'copper' or cmd == 'coin' or cmd == 'money':
+    if cmd == 'gold' or cmd == 'silver' or cmd == 'copper' or cmd == 'coin' or cmd == 'money':
         user.look_inside(user.inventory[1])
     elif cmd == 'st' or cmd == 'stat' or cmd == 'stats':
         player.player.see_stats()
-    elif cmd == 'inv' or cmd == 'inventory':
+    elif cmd == 'in' or cmd == 'inv' or cmd == 'inventory':
         player.player.see_inventory()
     elif cmd == "sav" or cmd == 'save':
         player.save_player()
     elif cmd == 'q' or cmd == 'qu' or cmd == 'quit':
         return True
+    else:
+        spl = read_input(cmd)
+        if spl == (None, None):
+            return False
+        elif spl[0] == 'look' and spl[1] == 'around':
+            return False
+        elif spl[0] == 'direction' and spl[1] in exits:
+            user.move(spl[1])
+        elif spl[0] == 'mob':
+            pass
+        elif spl[0] == 'container':
+            pass
+        elif spl[0] == 'attack':
+            pass
+        elif spl[0] == 'shoot':
+            pass
     return False
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~ Input Interpreter                      ~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def read_input(user_input: 'str') -> (str, str) or (None, None):
+    if user_input == 's' or user_input == 'sou' or user_input == 'sout' or user_input == 'south':
+        return 'direction', 's'
+    elif user_input == 'n' or user_input == 'nor' or user_input == 'nort' or user_input == 'north':
+        return 'direction', 'n'
+    elif user_input == 'e' or user_input == 'eas' or user_input == 'east':
+        return 'direction', 'e'
+    elif user_input == 'w' or user_input == 'wes' or user_input == 'west':
+        return 'direction', 'w'
+    spl = user_input.split(' ')
+    if len(spl) <= 1:
+        return None, None
+    if spl[0] == 'exa' or spl[0] == 'exam' or spl[0] == 'exami' or spl[0] == 'examin' or spl[0] == 'examine':
+        return 'mob', spl[1]
+    if spl[0] == 'l' or spl[0] == 'loo' or spl[0] == 'look':
+        if spl[1] == 'at' and len(spl) > 2:
+            return 'mob', spl[2]
+        elif spl[1] == 'in' and len(spl) > 2:
+            return 'container', spl[2]
+        elif spl[1] == 'around' or spl[1] == 'aroun' or spl[1] == 'ar':
+            return 'look', 'around'
+        else:
+            return None, None
+    elif spl[0] == 'ki' or spl[0] == 'kil' or spl[0] == 'kill':
+        return 'attack', spl[1]
+    elif spl[0] == 'hi' or spl[0] == 'hit' or spl[0] == 'sta' or spl[0] == 'stab':
+        return 'attack', spl[1]
+    elif spl[0] == 'att' or spl[0] == 'atta' or spl[0] == 'attac' or spl[0] == 'attack':
+        if spl[1] == 's' or spl[1] == 'sou' or spl[1] == 'sout' or spl[1] == 'south':
+            return 'shoot', 's'
+        if spl[1] == 'n' or spl[1] == 'nor' or spl[1] == 'nort' or spl[1] == 'north':
+            return 'shoot', 'n'
+        if spl[1] == 'e' or spl[1] == 'eas' or spl[1] == 'east':
+            return 'shoot', 'e'
+        if spl[1] == 'w' or spl[1] == 'wes' or spl[1] == 'west':
+            return 'shoot', 'w'
+        else:
+            return 'attack', spl[1]
+    if spl[0] == 'sh' or spl[0] == 'sho' or spl[0] == 'shoo' or spl[0] == 'shoot':
+        if spl[1] == 's' or spl[1] == 'sou' or spl[1] == 'sout' or spl[1] == 'south':
+            return 'shoot', 's'
+        if spl[1] == 'n' or spl[1] == 'nor' or spl[1] == 'nort' or spl[1] == 'north':
+            return 'shoot', 'n'
+        if spl[1] == 'e' or spl[1] == 'eas' or spl[1] == 'east':
+            return 'shoot', 'e'
+        if spl[1] == 'w' or spl[1] == 'wes' or spl[1] == 'west':
+            return 'shoot', 'w'
+    if spl[0] == 'fi' or spl[0] == 'fir' or spl[0] == 'fire':
+        if spl[1] == 's' or spl[1] == 'sou' or spl[1] == 'sout' or spl[1] == 'south':
+            return 'shoot', 's'
+        if spl[1] == 'n' or spl[1] == 'nor' or spl[1] == 'nort' or spl[1] == 'north':
+            return 'shoot', 'n'
+        if spl[1] == 'e' or spl[1] == 'eas' or spl[1] == 'east':
+            return 'shoot', 'e'
+        if spl[1] == 'w' or spl[1] == 'wes' or spl[1] == 'west':
+            return 'shoot', 'w'
 
 
 if __name__ == '__main__':
