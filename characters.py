@@ -19,7 +19,6 @@ class Character:
         self.dex = dexterity
         self.loc_x = loc_x
         self.loc_y = loc_y
-        self.weapon = 'sword'
 
 
 class Mob(Character):
@@ -38,3 +37,27 @@ class Mob(Character):
             self.loc_x -= 1
         elif direction == 'e':
             self.loc_x += 1
+
+
+class Fighter(Mob):
+    def __init__(self, loc_x: 'int', loc_y: 'int', name='Fighter'):
+        Character.__init__(self, name, loc_x, loc_y, random.randint(15, 20), 5, 4)
+        self.copper = random.randint(2, 12) + random.randint(3, 10)
+        self.silver = random.randint(0, 5) + random.randint(1, 5)
+        self.gold = random.randint(0, 3) + random.randint(0, 2) + random.randint(0, 2)
+        self.inventory = list()
+        self.inventory.append(it.Weapon('Iron Longsword', 2))
+        self.inventory.append(it.Armor('Leather Gambeson', 1))
+        self.inventory.append(it.CoinPouch('Coin Purse', 8))
+
+
+class Archer(Mob):
+    def __init__(self, loc_x: 'int', loc_y: 'int', name='Archer'):
+        Character.__init__(self, name, loc_x, loc_y, random.randint(14, 18), 4, 5)
+        self.copper = random.randint(2, 12) + random.randint(3, 10)
+        self.silver = random.randint(0, 5) + random.randint(1, 5)
+        self.gold = random.randint(0, 3) + random.randint(0, 2) + random.randint(0, 2)
+        self.inventory = list()
+        self.inventory.append(it.Weapon('Shortbow', 2))
+        self.inventory.append(it.Armor('Leather Gambeson', 1))
+        self.inventory.append(it.CoinPouch('Coin Purse', 8))

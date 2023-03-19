@@ -72,6 +72,7 @@ class CoinPouch(Container):
         self.copper = 0
         self.total = self.gold + self.silver + self.copper
 
+
 def check_items():
     """ For testing item information and parsing"""
     for x in items:
