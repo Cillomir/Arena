@@ -18,7 +18,39 @@ from os import system
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class PC(Character):
     def __init__(self, name: 'str', loc_x: 'int', loc_y: 'int'):
-        super().__init__(name, loc_x, loc_y, 20, 6, 5)
+        super().__init__(name, loc_x, loc_y, 20)
+        # Primary Stats: 80 base, 100 average, 250 normal max, 400 hero max
+        self.strength = 80
+        self.agility = 80
+        self.intellect = 80
+        self.wisdom = 80
+        self.fortitude = 80
+        self.xp = {'level': 1, 'experience': 0, 'training': 5, 'practice': 5, 'skill': 5, 'spell': 5}
+        # Secondary Stats
+        self.health = {'current': 20, 'max': 20, 'potential': 20}
+        self.stamina = {'current': 10, 'max': 10, 'potential': 10}
+        self.spirit = {'current': 10, 'max': 10, 'potential': 10}
+        self.defense = {'armor': 10, 'avoid': 0, 'cut': 0, 'stab': 0, 'bash': 0}
+        self.resist = {'fire': 0, 'water': 0, 'earth': 0, 'air': 0, 'cold': 0, 'electric': 0}
+        self.resist += {'toxin': 0, 'poison': 0, 'light': 0, 'dark': 0, 'disease': 0}
+        # Other Stats (?): Reputation, Luck, Charm/Poise, Knowledge, Personality
+        # Other Stats (?): Sanity, Courage, Constitution, Balance, Vitality
+        # Skills: Stealth,
+        # Weapon & Armor Skills:
+        self.skill_weapon = {'dagger': 5, 'sword': 0, 'axe': 0, 'hammer': 0, 'staff': 5}
+        self.skill_weapon += {'spear': 0, 'polearm': 0, 'whip': 0, 'flail': 0, 'exotic': 0}
+        self.skill_weapon += {'dart': 0, 'thrown': 0, 'bow': 0, 'crossbow': 0}
+        self.skill_weapon += {'stave': 0, 'wand': 0, 'scroll': 0}
+        self.skill_armor = {'shield': 0, 'light': 0, 'medium': 0, 'heavy': 0}
+        # Combat Skills:
+        self.skills_attacks = {'second': 0, 'third': 0, 'fourth': 0, 'fifth': 0}
+        self.skills_combat = {'hand-to-hand': 0, 'enhance damage': 0}
+        self.skills_combat += {'kick', 'bash', 'sweep', ''}
+        # Defense Skills:
+        self.skill_defense = {'parry': 0, 'dodge': 5, 'block': 0}
+        # Technical Skills:
+        self.skill_technical = {'fast healing': 0, 'perception': 0}
+
         self.inventory = list()
         self.equipment = dict()
         self.equipment['Weapon'] = Weapon('Training Sword', 0)

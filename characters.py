@@ -12,18 +12,19 @@ it.init('Items/Items.csv')
 
 
 class Character:
-    def __init__(self, name: 'str', loc_x, loc_y, health, strength, dexterity):
+    def __init__(self, name: 'str', loc_x, loc_y, health):
         self.name = name
+        self.max_health = health
         self.health = health
-        self.str = strength
-        self.dex = dexterity
         self.loc_x = loc_x
         self.loc_y = loc_y
 
 
 class Mob(Character):
-    def __init__(self, loc_x: 'int', loc_y: 'int'):
-        super().__init__('Rando', loc_x, loc_y, 10, 5, 4)
+    def __init__(self, name, loc_x: 'int', loc_y: 'int', health, strength, dexterity):
+        super().__init__(name, loc_x, loc_y, health)
+        self.str = strength
+        self.dex = dexterity
         self.inventory = list()
         self.inventory.append(it.items[random.randint(0, len(it.items)-1)])
 
@@ -41,7 +42,7 @@ class Mob(Character):
 
 class Fighter(Mob):
     def __init__(self, loc_x: 'int', loc_y: 'int', name='Fighter'):
-        Character.__init__(self, name, loc_x, loc_y, random.randint(15, 20), 5, 4)
+        Mob.__init__(self, name, loc_x, loc_y, random.randint(15, 20), 5, 4)
         self.copper = random.randint(2, 12) + random.randint(3, 10)
         self.silver = random.randint(0, 5) + random.randint(1, 5)
         self.gold = random.randint(0, 3) + random.randint(0, 2) + random.randint(0, 2)

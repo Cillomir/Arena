@@ -1,0 +1,54 @@
+Welcome to the exciting world of adventuring (world name pending).
+This adventurers guide is designed to aid those who are unfamiliar with the
+rigors of the world they now find themselves in. Within the world itself
+there are many ways of learning. Numerous guards will be posted who can
+answer questions beginning of those asking for 'help'. Most shopkeepers
+are also willing to answer those seeking 'help'.
+Key areas will typically be marked with signposts. Also, each adventurer
+will be outfitted with a bound copy of the Adventurer's First Steps. One
+can 'read' a specific chapter to learn more about it, such as 'combat',
+'movement', or 'shopping'. More advanced guidebooks can be purchased at
+various bookstores, for a price.
+
+For now, what would you like to read about?
+
+[W] - The World
+[P] - Playing the Game
+[C] - Character Creation
+[R] - Playable Races
+[?] - Class Roles
+[] - Stats and Attributes
+[] - Skills and Spells
+[]
+
+
+Chapter on the World:
+
+
+Chapter on Playing the Game:
+
+
+Chapter on Character Creation:
+
+
+Chapter on Playable Races:
+
+
+Chapter on Class Roles:
+
+
+Chapter on Stats and Attributes:
+
+
+Chapter on Skills and Spells:
+Every adventurer starts out knowing a few skills and the occasional spell.
+As you gain experience, you can train to improve those skills. New skills
+may become available through training, quests, or other sources.
+Spells are learned in a similar way, but a spell requires talent in a certain
+field of magic. These might be in the form of healing, protection, nature,
+conjuration, destruction, or other areas.
+The more a skill or spell is trained and used, the more adept the person
+becomes at using it. This typically makes it more reliable, more powerful,
+and more useful. But it also becomes harder to unlock higher facets of a
+skill the more you know about it, up to the point where it is considered
+fully mastered.

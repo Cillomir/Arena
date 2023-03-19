@@ -1,0 +1,13 @@
+skill,points,low,high,attribute
+archery,4,0,100
+sword,4,0,100
+dagger,3,5,100
+axe,4,0,100
+mace,4,0,100
+thrusting,3,10,100
+stabbing,2,15,100
+piercing,2,10,100
+slashing,3,10,100
+bludgeoning,3,10,100
+
+
