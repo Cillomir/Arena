@@ -155,32 +155,28 @@ class PC(Character):
         # Abjuration
         # Antimagic Sphere
         # Alteration
-        # Cure Mutilation 	Frenzy 	Lava Walk 	Magnetic Field
-        # Mutilate 	Pustulate 	Quicksand
+        # Mutilate, Cure Mutilation, Frenzy, Pustulate, Magnetic Field, Quicksand
         # Summoning
-        # Megalith 	Monument 	Swarm 	Warp
+        # Megalith, Monument, Warp
         # Enchantment
-        # Bathe 	Frostborne 	Lava Cloak
+        # Bathe, Frostborne, Lava Cloak
         # Illusion
         # Displacement
         # Invocation
         # Air Halo
         # Evocation
-        # Chain Lightning 	Diseased Cloud 	Ice Whip 	Landslide
-        # Reflective Fireball 	Waterspout, Thunderstorm, Ice Storm, Blizzard
+        # Chain Lightning, Diseased Cloud, Ice Whip, Landslide
+        # Reflective Fireball, Waterspout, Thunderstorm, Ice Storm, Blizzard
         # Divination
         # Illumination
         # Necromancy
         # Necromancers Guile
         # Conjuration
-        # Acid Mist 	Blood Dance 	Cursed Fog 	Ember Carom
-        # Lightning Shroud 	Poison Gas 	Soul Sacrifice
-        # Chaos
-        # Air Blast 	Buffet 	Damnation 	Withering Touch
-        # MEDIEVIA SPELLS
+        # Acid Mist, Blood Dance, Cursed Fog, Ember Carom, Lightning Shroud, Poison Gas
+        # Soul Sacrifice, Chaos, Air Blast, Buffet, Damnation, Withering Touch
+
+        # SPELLS
         #           MAGE                                 CLERIC
-        #
-        #
         # Level  1 - "MAGIC MISSILE"                      ARMOR
         #                                                 "CAUSE LIGHT"
         #
