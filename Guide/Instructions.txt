@@ -52,3 +52,33 @@ becomes at using it. This typically makes it more reliable, more powerful,
 and more useful. But it also becomes harder to unlock higher facets of a
 skill the more you know about it, up to the point where it is considered
 fully mastered.
+
+Spells are broken into (num) schools of magic.
+Abjuration: Spells that banish or send away
+
+Alteration: Spells that change the fundamental properties of things.
+These spells can affect an items or persons state. 
+
+Conjuration: Spells that call forth astral energy, molding it into a physical
+force. These spells may summon creatures from another plane, create objects 
+from nothingness, or move people from one location to another. Spells that 
+mold astral energy into a physical force.
+
+Divination Spells: Spells that reveal details of an item or person
+
+Enchantment: Spells that enhance the nature of an item or person
+
+Evocation: Spells that cause a physical manifestation of force. These spells
+typically involve harming living or non-living things.
+
+Illusion: Spells that involve manipulating the mind and senses of
+an enemy. These spells typically confuse or mislead others.
+
+Invocation Spells: Spells that bring an outside force to bear
+
+Mysticism: Spells that unravel the mysteries of the universe, affecting the
+laws of nature themselves. 
+
+Necromancy Spells: Spells that effect the life force of a being
+
+Telekinetic Spells: Spells that can move or manipulate objects from a distance
