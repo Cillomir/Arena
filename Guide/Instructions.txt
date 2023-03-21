@@ -54,31 +54,40 @@ skill the more you know about it, up to the point where it is considered
 fully mastered.
 
 Spells are broken into (num) schools of magic.
-Abjuration: Spells that banish or send away
+Abjuration: Spells that create a barrier, banish, or negate harmful effects.
+These spells are often used in the suppression of other magic.
 
-Alteration: Spells that change the fundamental properties of things.
-These spells can affect an items or persons state. 
+Alteration: Spells that change the fundamental properties of things, reshaping
+the world. These spells can affect an items or persons state of being, and
+include transformational or transumation effects. 
 
 Conjuration: Spells that call forth astral energy, molding it into a physical
 force. These spells may summon creatures from another plane, create objects 
-from nothingness, or move people from one location to another. Spells that 
-mold astral energy into a physical force.
+from nothingness, or move people from one location to another.
 
-Divination Spells: Spells that reveal details of an item or person
+Divination: Spells that reveal details of an item or person. These spells
+are used to glean information, perceive people and places, and uncover the mysteries
+of the universe.
 
-Enchantment: Spells that enhance the nature of an item or person
+Enchantment: Spells that enhance or influence the nature of an item or person. These
+spells may attempt to exert control over a person or augment the inherant attributes
+of objects.
 
 Evocation: Spells that cause a physical manifestation of force. These spells
-typically involve harming living or non-living things.
+typically involve a destructive power, aimed toward harming living or non-living 
+things.
 
-Illusion: Spells that involve manipulating the mind and senses of
-an enemy. These spells typically confuse or mislead others.
+Illusion: Spells that involve manipulating the mind and senses of an onlooker. 
+These spells typically confuse or mislead others, often involving images or sounds.
 
-Invocation Spells: Spells that bring an outside force to bear
+Invocation Spells: Spells that bring an outside force to bear. These spells include
+many forms of healing magic as well as non-destructive elemental magics.
 
 Mysticism: Spells that unravel the mysteries of the universe, affecting the
 laws of nature themselves. 
 
-Necromancy Spells: Spells that effect the life force of a being
+Necromancy Spells: Spells that effect the life force of a being. These spells are
+often referred to as dark magic as they regularly involve the creation or control
+of the undead.
 
 Telekinetic Spells: Spells that can move or manipulate objects from a distance
