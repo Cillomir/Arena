@@ -37,7 +37,7 @@ class PC(Character):
         self.spirit = {'current': 10, 'max': 10, 'potential': 10}
         self.defense = {'armor': 10, 'reflex': 0, 'cut': 0, 'stab': 0, 'bash': 0}
         self.resist = {'fire': 0, 'water': 0, 'earth': 0, 'air': 0, 'cold': 0, 'electric': 0}
-        self.resist += {'toxin': 0, 'poison': 0, 'light': 0, 'dark': 0, 'disease': 0}
+        self.resist.update({'toxin': 0, 'poison': 0, 'light': 0, 'dark': 0, 'disease': 0})
         # Other Stats (?): Reputation, Luck, Charm/Poise, Knowledge, Personality
         # Other Stats (?): Sanity, Courage, Balance
         self.pc_race = None
@@ -46,135 +46,55 @@ class PC(Character):
         self.pc_abilities = None
         # Weapon & Armor Skills:
         self.skill_weapon = {'dagger': 5, 'sword': 0, 'axe': 0, 'hammer': 0, 'staff': 5}
-        self.skill_weapon += {'two-hand sword': 0, 'two-hand axe': 0, 'two-hand hammer': 0, 'two-hand staff': 0}
-        self.skill_weapon += {'spear': 0, 'polearm': 0, 'lance': 0, 'whip': 0, 'flail': 0}
-        self.skill_weapon += {'dart': 0, 'javelin': 0, 'thrown': 0, 'sling': 0, 'bow': 0, 'crossbow': 0}
-        self.skill_weapon += {'stave': 0, 'wand': 0, 'scroll': 0, 'magic items': 0}
+        self.skill_weapon.update({'two-hand sword': 0, 'two-hand axe': 0, 'two-hand hammer': 0, 'two-hand staff': 0})
+        self.skill_weapon.update({'spear': 0, 'polearm': 0, 'lance': 0, 'whip': 0, 'flail': 0})
+        self.skill_weapon.update({'dart': 0, 'javelin': 0, 'thrown': 0, 'sling': 0, 'bow': 0, 'crossbow': 0})
+        self.skill_weapon.update({'stave': 0, 'wand': 0, 'scroll': 0, 'magic items': 0})
         self.skill_exotic = {'hook': 0, 'scythe': 0, 'sickle': 0, 'bola': 0, 'boomerang': 0}
         self.skill_armor = {'shield': 0, 'light': 0, 'medium': 0, 'heavy': 0}
         # Combat Skills:
         self.skills_attacks = {'second': 0, 'third': 0, 'fourth': 0, 'fifth': 0}
         self.skills_combat = {'hand-to-hand': 0, 'blind-fighting': 0, 'martial-arts': 0, 'enhance damage': 0}
-        self.skills_combat += {'kick': 0, 'bash': 0, 'sweep': 0, 'charge': 0, 'grapple': 0, 'feint': 0}
-        self.skills_combat += {'defend': 0, 'slash': 0, 'disarm': 0, 'tackle': 0}
+        self.skills_combat.update({'kick': 0, 'bash': 0, 'sweep': 0, 'charge': 0, 'grapple': 0, 'feint': 0})
+        self.skills_combat.update({'defend': 0, 'slash': 0, 'disarm': 0, 'tackle': 0})
         # Defense Skills:
         self.skill_defense = {'parry': 0, 'dodge': 5, 'block': 0}
-        self.skill_defense += {'second defence': 0, 'discipline': 0}
+        self.skill_defense.update({'second defence': 0, 'discipline': 0})
         # Technical Skills:
         self.skill_technical = {'stealth': 0, 'sneak': 0, 'hide': 0, 'scan': 0, 'tracking': 0, 'meditation': 0}
-        self.skill_technical += {'acrobatics': 0, 'athletics': 0, 'disarm traps': 0, 'snare': 0}
-        self.skill_technical += {'herbalism': 0, 'scribe': 0, 'peek': 0, 'thievery': 0, 'forgery': 0, 'lock picking': 0, 'pickpocket': 0}
-        self.skill_technical += {'imbue poison': 0}
+        self.skill_technical.update({'acrobatics': 0, 'athletics': 0, 'disarm traps': 0, 'snare': 0})
+        self.skill_technical.update({'herbalism': 0, 'scribe': 0, 'peek': 0, 'thievery': 0, 'forgery': 0})
+        self.skill_technical.update({'imbue poison': 0, 'lock picking': 0, 'pickpocket': 0})
         self.skill_passive = {'fast healing': 0, 'perception': 0, 'riding': 0, 'detect traps': 0}
-        self.skill_passive += {}
-        self.skill_passive += {'knowledge': 0, 'lore': 0}
+        self.skill_passive.update({})
+        self.skill_passive.update({'knowledge': 0, 'lore': 0})
         self.skill_enhancements = {'endurance': 0, 'vitality': 0, 'constitution': 0}
 
-        # Fireshield, Death Grip, Flame Wind, Poison, Shocking Grasp
-        # Spark, Thunderclap, Concentration
-        # Magic Message, Gate Travel, Nexus, Plane Travel
-        # Faerie Fire, Mental Clarity, Multiply Magic, Slow Magic
-        # Bar, Cancellation, Describe, Disequilibriate
-        # Disrupt Sight, Domination, Esp, Float
-        # Force Field, Forget, Geisteblitz, Induce Aggression
-        # Irritation, Knock, Memory Drain, Mental Disruption
-        # Mesmerize, Mimic, Mind Shield, Nullification Field
-        # Pense, Pyrokinesis, Sensory Enhancement, Spook
-        # Telesmatic Force, Teleview, Transference, Electrogenic Growth, Fungal Growth
-        # Death Grip, Guise Of Nature, Otolithic Growth, Wind Walk
-        # Charm, Levitation, Gate Travel, Shadow Door
-        # Tinnitus, Circle Of Thorns, Flintstrike, Magic Message
-        # Awaken, Condemn, Refresh, Requiem, Excommunicate
-        # Augment Aura, Channel Faith, Totem, Shadow Golem, Shadow Imp
-        # Beacon, Consecrate Food, Desecrate Armor
-        # Elemental Shield, Negation, Pentacle, Swarm
-        # Delay Reincarnation, Disjunction, Famine
-        # Fatigue, Immobilize, Impede Movement
-        # Leech, Leech Conduit, Malediction, Malignancy
-        # Shadow Armor, Shadow Light
-        # Convocation 	Magic Message
-
-
         # Mystic Spells:
-        self.spell_mystic = {'lay on hands': 0}
-        self.spell_mystic += {'evil eye', 'jinx', 'insanity'}
+        # self.spell_mystic = {}
         # Abjuration Spells: Spells that banish or send away
-        self.spell_abjuration = {'cure disease', 'cure poison', 'remove curse'}
-        self.spell_abjuration = {'counterspell', 'dispel area', 'dispel magic', 'silence'}
-        self.spell_abjuration += {'abjure', 'room shield', 'sanctify', 'sanctuary', 'searing touch'}
-        self.spell_protection = {'evil', 'good', 'spell shield'}
+        # self.spell_abjuration = {}
+        # self.spell_protection = {}
         # Alteration Spells: Spells that change an item or persons state
-        self.spell_alteration = {'calm', 'cure blindness', 'cure light', 'cure serious', 'cure critical', 'heal'}
-        self.spell_alteration += {'haste', 'slow', 'infravision', 'lava walk', 'magic lock', 'magic unlock'}
-        self.spell_alteration += {'erase', 'refresh', 'resurrect', 'change sex', 'pass door', 'levitation'}
-        self.spell_alteration += {'underwater breathing', 'weaken', 'sleep', 'stoneskin'}
-        self.spell_enhance = {'strength', 'unnatural strength', 'agility', 'unnatural agility'}
-        self.spell_enhance += {'intellect', 'wisdom', 'fortitude'}
+        # self.spell_alteration = {}
+        # self.spell_enhance = {}
         # Enchantment Spells: Spells that enhance the nature of an item or person
-        self.spell_enchantment = {'consecrate armor', 'consecrate weapon', 'consecrate food'}
-        self.spell_enchantment += {'beacon', 'charm', 'curse', 'recharge item'}
+        # self.spell_enchantment = {}
         # Illusion Spells: Spells that confuse or mislead
-        self.spell_illusion = {'light', 'color spray', 'invisibility', 'darkness'}
-        self.spell_illusion += {'camouflage', 'concealment'}
+        # self.spell_illusion = {}
         # Invocation Spells: Spells that bring an outside force to bear
-        self.spell_invocation = {'bless', 'plague', 'curse', 'bane', 'hex'}
-        self.spell_invocation += {'blind', 'deafen', 'confusion'}
+        # self.spell_invocation = {}
         # Divination Spells: Spells that reveal details of an item or person
-        self.spell_divination = {'detect alignment', 'detect illusion', 'detect invisible', 'detect magic'}
-        self.spell_divination += {'identify', 'sense life', 'wizard eye', 'remote senses', 'infravision', 'read aura'}
+        # self.spell_divination = {}
         # Conjuration Spells: Spells that mold astral energy into a physical force
-        self.spell_conjuration = {'aegis', 'armor', 'create food', 'create water'}
-        self.spell_conjuration += {'create spring', 'campfire', 'fountain', 'magic carpet'}
-        self.spell_conjuration += {'blink', 'control winds', 'teleport', 'shield', 'hands of wind'}
-        self.spell_conjuration += {'whirlwind', 'bubble cluster', 'call lightning'}
-        self.spell_summon = {'fire elemental', 'air elemental', 'earth elemental', 'water elemental', 'shade'}
-        self.spell_summon += {'find familiar', 'summon familiar', 'summon mount', 'summon', 'word of recall'}
+        # self.spell_conjuration = {}
+        # self.spell_summon = {}
         # Evocation Spells: Spells that cause a physical manifestation of force
-        self.spell_evocation = {'ice storm', 'thunderstorm', 'acid blast', 'ice wind', 'tremor'}
-        self.spell_evocation += {'circle of fire', 'fireball', 'frost', 'iceball', 'magic missile'}
-        self.spell_evocation += {'lightning bolt', 'magic dart', 'spark', 'magic bomb', 'web'}
+        # self.spell_evocation = {}
         # Telekinetic Spells: Spells that can move or manipulate objects from a distance
-        self.spell_kinetic = {'telekinesis', 'telekinetic bash', 'telekinetic pierce', 'telekinetic slash'}
-        self.spell_kinetic += {'telekinetic wave', 'telekinetic punch', 'telekinetic shield', 'telekinetic explosion'}
+        # self.spell_kinetic = {}
         # Necromancy Spells: Spells that effect the life force of a being
-        self.spell_necromancy = {'animate dead', 'energy drain', 'enervation', 'kill', 'reanimate', 'life drain'}
-        self.spell_necromancy += {'cause light', 'cause serious', 'cause critical', 'harm', 'chill touch'}
-
-        # Evocation
-        # Air Evocation, Ash Evocation, Dust Evocation, Earth Evocation
-        # Fire Evocation, Ice Evocation, Lightning Evocation, Magma Evocation
-        # Minerals Evocation, Ooze Evocation, Radiance Evocation, Salt Evocation
-        # Smoke Evocation, Steam Evocation, Vacuum Evocation, Water Evocation
-        # Invocation
-        # Air Invocation, Ash Invocation, Dust Invocation, Earth Invocation
-        # Fire Invocation, Ice Invocation, Lightning Invocation, Magma Invocation
-        # Minerals Invocation, Ooze Invocation, Radiance Invocation, Salt Invocation
-        # Smoke Invocation, Steam Invocation, Vacuum Invocation, Water Invocation
-
-        # ADVANCED
-        # Abjuration
-        # Antimagic Sphere
-        # Alteration
-        # Mutilate, Cure Mutilation, Frenzy, Pustulate, Magnetic Field, Quicksand
-        # Summoning
-        # Megalith, Monument, Warp
-        # Enchantment
-        # Bathe, Frostborne, Lava Cloak
-        # Illusion
-        # Displacement
-        # Invocation
-        # Air Halo
-        # Evocation
-        # Chain Lightning, Diseased Cloud, Ice Whip, Landslide
-        # Reflective Fireball, Waterspout, Thunderstorm, Ice Storm, Blizzard
-        # Divination
-        # Illumination
-        # Necromancy
-        # Necromancers Guile
-        # Conjuration
-        # Acid Mist, Blood Dance, Cursed Fog, Ember Carom, Lightning Shroud, Poison Gas
-        # Soul Sacrifice, Chaos, Air Blast, Buffet, Damnation, Withering Touch
-
+        # self.spell_necromancy = {}
 
         self.inventory = list()
         self.equipment = dict()
@@ -207,8 +127,11 @@ class PC(Character):
         system('cls')
         print(f'\nName: {self.name} {" " * (20 - len(self.name))} Location: ({self.loc_x}, {self.loc_y})')
         print(f'\nHealth: {self.health}')
-        print(f'\nStrength: {self.str}')
-        print(f'Dexterity: {self.dex}')
+        print(f'\nStrength: {self.strength}')
+        print(f'Agility: {self.agility}')
+        print(f'Intellect: {self.intellect}')
+        print(f'Wisdom: {self.wisdom}')
+        print(f'Fortitude: {self.fortitude}')
         print(f'\nWeapon:    ', end='')
         print('Nothing' if self.equipment["Weapon"] is None else self.equipment["Weapon"].name)
         print(f'Off-Hand:  ', end='')
