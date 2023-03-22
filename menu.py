@@ -22,11 +22,11 @@ def start_menu():
         print(colors.Fore.cyan, colors.Effect.bold, 'Welcome to the Arena', colors.Effect.reset)
         print('\t\tby Joel Leckie\n')
         print(colors.Fore.green, 'Select an option:')
-        print('\t[N] - New Game')
-        print('\t[L] - Load Game')
-        print('\t[I] - Instructions')
-        print('\t[S] - Settings')
-        print('\t[Q] - Quit')
+        print('\t', colors.Fore.blue, '[N]', colors.Effect.reset, ' - New Game')
+        print('\t', colors.Fore.blue, '[L]', colors.Effect.reset, ' - Load Game')
+        print('\t', colors.Fore.blue, '[I]', colors.Effect.reset, ' - Instructions')
+        print('\t', colors.Fore.blue, '[S]', colors.Effect.reset, ' - Settings')
+        print('\t', colors.Fore.blue, '[Q]', colors.Effect.reset, ' - Quit')
         print(colors.Effect.reset, end='')
         cmd = (input('Your command? ')).lower()
         if cmd == 'n' or cmd == 'new' or cmd == 'new game':
@@ -90,7 +90,7 @@ def settings():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~ In-Game Menu                           ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def menu(user: 'player.PC', place: 'area.Area'):
+def menu(user: player.PC, place: area.Area):
     exits = place.exits(user.loc_x, user.loc_y)
     print('\n\tAvailable exits (', end='')
     for e in exits:
@@ -187,6 +187,7 @@ def read_input(user_input: 'str') -> (str, str) or (None, None):
             return 'shoot', 'e'
         if spl[1] == 'w' or spl[1] == 'wes' or spl[1] == 'west':
             return 'shoot', 'w'
+    return None, None
 
 
 if __name__ == '__main__':

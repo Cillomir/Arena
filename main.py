@@ -30,9 +30,9 @@ for x in range(place.width):
         if (x, y) not in place.walls:
             arena.append((x, y))
 room = random.choice(arena)
-all_creatures.append(characters.Mob('Mob', room[0], room[1], 15, 5, 4))
+all_creatures.append(characters.Mob('A Fighter', room[0], room[1], 15, 5, 4))
 room = random.choice(arena)
-all_creatures.append(characters.Mob('Mob', room[0], room[1], 15, 5, 4))
+all_creatures.append(characters.Mob('A Fighter', room[0], room[1], 15, 5, 4))
 
 
 def __main__():
@@ -43,6 +43,7 @@ def __main__():
         system('cls')
         print('\n\n\n')
         place.show(all_creatures)
+        area.show_creatures(player.player.loc_x, player.player.loc_y, all_creatures)
         if menu.menu(player.player, place):
             print("Quitting...")
             tick.stop()

@@ -7,6 +7,7 @@ Created on Sat Mar 11 13:29:32 2023
 
 
 import characters
+import Items.items
 import player
 import colors
 
@@ -46,8 +47,16 @@ class Area:
             directions.append('e')
         return directions
 
-    def creatures(self, loc_x: 'int', loc_y: 'int'):
-        pass
 
-    def objects(self, loc_x: 'int', loc_y: 'int'):
-        pass
+def show_creatures(loc_x: 'int', loc_y: 'int', creatures: 'list[characters.Character]'):
+    mobs = [m for m in creatures if type(m) is characters.Mob and m.loc_x == loc_x and m.loc_y == loc_y]
+    if len(mobs) > 0:
+        for m in mobs:
+            print('\t', colors.Fore.light_red, m.name, colors.Effect.reset)
+
+
+def show_objects(self, loc_x: 'int', loc_y: 'int', objects: 'list[Items.items.Item]'):
+    objs = [o for o in objects if o.loc_x == loc_x and o.loc_y == loc_y]
+    if len(objs) > 0:
+        for o in objs:
+            print('\t', colors.Fore.yellow, o.name, colors.Effect.reset)
