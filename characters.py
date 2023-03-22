@@ -8,6 +8,7 @@ Created on Sat Mar 11 13:22:10 2023
 
 import random
 import Items.items as it
+from player import PC
 it.init('Items/Items.csv')
 
 
@@ -38,6 +39,19 @@ class Mob(Character):
             self.loc_x -= 1
         elif direction == 'e':
             self.loc_x += 1
+
+    def attack(self, user: 'PC'):
+        to_hit = random.randint(1, 20) + self.dex
+        if to_hit >= (user.agility + 10):
+            damage = random.randint(1, 6) + self.str
+            print(f'\t{self.name} hits you for {damage} damage!')
+            user.health['current'] -= damage
+            if user.health['current'] <= 0:
+                print(f'\tYou have been slain by {self.name}')
+                exit()
+        else:
+            print(f'\t{self.name} tries to attack you but misses')
+        return
 
 
 class Fighter(Mob):
