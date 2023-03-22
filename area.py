@@ -9,7 +9,7 @@ Created on Sat Mar 11 13:29:32 2023
 import characters
 import Items.items
 import player
-import colors
+from colors import Fore, Back, Effect
 
 
 class Area:
@@ -26,13 +26,13 @@ class Area:
             print('', end='\t')
             for x in range(self.width):
                 if (x, y) in character:
-                    print(colors.Fore.blue, '@', end=f'{colors.Effect.reset} ')
+                    print(Fore.BLUE, '@', end=f'{Effect.RESET} ')
                 elif (x, y) in mobiles:
-                    print(colors.Fore.red, '!', end=f'{colors.Effect.reset} ')
+                    print(Fore.RED, '!', end=f'{Effect.RESET} ')
                 elif (x, y) not in self.walls:
-                    print(colors.Fore.green, '+', end=f'{colors.Effect.reset} ')
+                    print(Fore.GREEN, '+', end=f'{Effect.RESET} ')
                 else:
-                    print(colors.Fore.light_grey + colors.Back.light_grey, '#', colors.Effect.reset, end='')
+                    print(Fore.WHITE + Back.WHITE, '#', Effect.RESET, end='')
             print()
     
     def exits(self, loc_x: 'int', loc_y: 'int'):
@@ -52,11 +52,11 @@ def show_creatures(loc_x: 'int', loc_y: 'int', creatures: 'list[characters.Chara
     mobs = [m for m in creatures if type(m) is characters.Mob and m.loc_x == loc_x and m.loc_y == loc_y]
     if len(mobs) > 0:
         for m in mobs:
-            print('\t', colors.Fore.light_red, m.name, colors.Effect.reset)
+            print('\t', Fore.LIGHT_RED, m.name, Effect.RESET)
 
 
 def show_objects(self, loc_x: 'int', loc_y: 'int', objects: 'list[Items.items.Item]'):
     objs = [o for o in objects if o.loc_x == loc_x and o.loc_y == loc_y]
     if len(objs) > 0:
         for o in objs:
-            print('\t', colors.Fore.yellow, o.name, colors.Effect.reset)
+            print('\t', Fore.YELLOW, o.name, Effect.RESET)

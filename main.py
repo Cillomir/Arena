@@ -5,14 +5,16 @@
 Created on Sat Mar 11 13:17:52 2023
 """
 
-import characters
-import area
 import menu
+import characters
 import player
-import random
+import area
 import ticker
+import colors
+import random
 from os import system
 
+colors.init()
 width = height = 10
 
 walls = [(2, 2), (2, height - 3), (width - 3, 2), (width - 3, height - 3)]

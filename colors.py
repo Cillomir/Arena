@@ -7,44 +7,54 @@ Created on Sat Mar 11 13:17:52 2023
 
 
 # Color codes as per colorama online guide
-import colorama
-colorama.init()
+def init():
+    import colorama
+    colorama.init()
 
 
 class Effect:
-    reset = '\033[0m'
-    bold = '\033[01m'
-    disable = '\033[02m'
-    underline = '\033[04m'
-    reverse = '\033[07m'
-    strikethrough = '\033[09m'
-    invisible = '\033[08m'
+    RESET = '\033[0m'
+    BOLD = '\033[01m'
+    DISABLE = '\033[02m'
+    ITALIC = '\33[03m'
+    UNDERLINE = '\033[04m'
+    BLINK = '\033[05m'
+    BLINK2 = '\033[06m'
+    REVERSE = '\033[07m'
+    INVISIBLE = '\033[08m'
+    STRIKETHROUGH = '\033[09m'
 
 
 class Fore:
-    black = '\033[30m'
-    red = '\033[31m'
-    green = '\033[32m'
-    orange = '\033[33m'
-    blue = '\033[34m'
-    purple = '\033[35m'
-    cyan = '\033[36m'
-    light_grey = '\033[37m'
-    dark_grey = '\033[90m'
-    light_red = '\033[91m'
-    light_green = '\033[92m'
-    yellow = '\033[93m'
-    light_blue = '\033[94m'
-    pink = '\033[95m'
-    light_cyan = '\033[96m'
+    BLACK = '\033[30m'
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    ORANGE = '\033[33m'
+    BLUE = '\033[34m'
+    PURPLE = '\033[35m'
+    CYAN = '\033[36m'
+    WHITE = '\033[37m'
+    GREY = '\033[90m'
+    LIGHT_RED = '\033[91m'
+    LIGHT_GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    LIGHT_BLUE = '\033[94m'
+    PINK = '\033[95m'
+    LIGHT_CYAN = '\033[96m'
+
+    def rgb(red, green, blue):
+        return f'\u001b[38;2;{red};{green};{blue}m'
 
 
 class Back:
-    black = '\033[40m'
-    red = '\033[41m'
-    green = '\033[42m'
-    orange = '\033[43m'
-    blue = '\033[44m'
-    purple = '\033[45m'
-    cyan = '\033[46m'
-    light_grey = '\033[47m'
+    BLACK = '\033[40m'
+    RED = '\033[41m'
+    GREEN = '\033[42m'
+    ORANGE = '\033[43m'
+    BLUE = '\033[44m'
+    PURPLE = '\033[45m'
+    CYAN = '\033[46m'
+    WHITE = '\033[47m'
+
+    def rgb(red, green, blue):
+        return f'\u001b[48;2;{red};{green};{blue}m'

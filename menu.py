@@ -5,12 +5,10 @@
 Created on Sat Mar 11 13:50:00 2023
 """
 
-
 import area
-import characters
 from os import system
-import colors
 import player
+from colors import Effect, Fore, Back
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -19,15 +17,15 @@ import player
 def start_menu():
     while True:
         system('cls')
-        print(colors.Fore.cyan, colors.Effect.bold, 'Welcome to the Arena', colors.Effect.reset)
+        print(Fore.CYAN, Effect.BOLD, 'Welcome to the Arena', Effect.RESET)
         print('\t\tby Joel Leckie\n')
-        print(colors.Fore.green, 'Select an option:')
-        print('\t', colors.Fore.blue, '[N]', colors.Effect.reset, ' - New Game')
-        print('\t', colors.Fore.blue, '[L]', colors.Effect.reset, ' - Load Game')
-        print('\t', colors.Fore.blue, '[I]', colors.Effect.reset, ' - Instructions')
-        print('\t', colors.Fore.blue, '[S]', colors.Effect.reset, ' - Settings')
-        print('\t', colors.Fore.blue, '[Q]', colors.Effect.reset, ' - Quit')
-        print(colors.Effect.reset, end='')
+        print(Fore.GREEN, 'Select an option:')
+        print('\t', Fore.BLUE, '[N]', Effect.RESET, ' - New Game')
+        print('\t', Fore.BLUE, '[L]', Effect.RESET, ' - Load Game')
+        print('\t', Fore.BLUE, '[I]', Effect.RESET, ' - Instructions')
+        print('\t', Fore.BLUE, '[S]', Effect.RESET, ' - Settings')
+        print('\t', Fore.BLUE, '[Q]', Effect.RESET, ' - Quit')
+        print(Effect.RESET, end='')
         cmd = (input('Your command? ')).lower()
         if cmd == 'n' or cmd == 'new' or cmd == 'new game':
             if new_game():

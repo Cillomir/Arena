@@ -8,7 +8,7 @@ Created on Sat Mar 11 13:22:10 2023
 
 import random
 import Items.items as it
-from player import PC
+#from player import PC
 it.init('Items/Items.csv')
 
 

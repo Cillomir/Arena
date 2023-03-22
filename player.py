@@ -188,7 +188,19 @@ class PC(Character):
 player = PC('user', 0, 0)
 
 
-def player_race(pc_player: 'PC', pc_race):
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~ Create new player data                ~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def new_player(name: str):
+    global player
+    player = PC(name, 5, 5)
+
+
+def player_gender(pc_player: PC, gender: str):
+    pc_player.pc_gender = gender
+
+
+def player_race(pc_player: PC, pc_race):
     pc_player.pc_race = pc_race
     if pc_race == 'Human':
         pc_player.strength += 10
@@ -264,14 +276,6 @@ def player_class(pc_player: 'PC', pc_class):
         pc_player.intellect += 20
         pc_player.fortitude += 10
         pass
-
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# ~~~~~~ Create new player data                ~~~~~
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def new_player(name: str):
-    global player
-    player = PC(name, 5, 5)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
