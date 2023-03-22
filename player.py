@@ -7,10 +7,11 @@ Created on  2023-03-14
 
 
 import colors
-from characters import Character
+from characters import Character, Mob
 from Items.items import Item, Weapon, Armor, OffHand, Wearable, Container, CoinPouch
 from json import loads, dumps
 from os import system
+import random
 
 
 # Class Skills
@@ -122,6 +123,18 @@ class PC(Character):
             self.loc_x -= 1
         elif direction == 'e':
             self.loc_x += 1
+
+    def attack(self, enemy: 'Mob'):
+        to_hit = random.randint(1, 20) + self.agility
+        if to_hit >= enemy.dex + 10:
+            damage = random.randint(1, 8) + self.strength
+            print(f'You hit {enemy.name} for {damage} damage!')
+            enemy.health -= damage
+            if enemy.health <= 0:
+                print(f'You have slain {enemy.name}!')
+        else:
+            print(f'You attacked {enemy.name} and missed')
+        return
 
     def see_stats(self):
         system('cls')
