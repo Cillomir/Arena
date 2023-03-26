@@ -96,7 +96,7 @@ class NPC(Character):
 
 
 class Fighter(Mob):
-    def __init__(self, loc_x: 'int', loc_y: 'int', name='Fighter'):
+    def __init__(self, loc_x: int, loc_y: int, name: str = 'Fighter'):
         health, stamina, mana = random.randint(15, 20), random.randint(10, 12), 0
         strength, agility, intellect, wisdom, fortitude = 120, 110, 90, 100, 110
         defense = {'armor': 12, 'reflex': 8, 'cut': 3, 'stab': 2, 'bash': 2}
@@ -115,7 +115,7 @@ class Fighter(Mob):
 
 
 class Berserker(Mob):
-    def __init__(self, loc_x: 'int', loc_y: 'int', name='Berserker'):
+    def __init__(self, loc_x: int, loc_y: int, name: str = 'Berserker'):
         health, stamina, mana = random.randint(18, 24), random.randint(10, 12), 0
         strength, agility, intellect, wisdom, fortitude = 125, 110, 90, 90, 120
         defense = {'armor': 6, 'reflex': 6, 'cut': 4, 'stab': 3, 'bash': 4}
@@ -134,7 +134,7 @@ class Berserker(Mob):
 
 
 class Archer(Mob):
-    def __init__(self, loc_x: 'int', loc_y: 'int', name='Archer'):
+    def __init__(self, loc_x: int, loc_y: int, name: str = 'Archer'):
         health, stamina, mana = random.randint(14, 18), random.randint(8, 10), 0
         strength, agility, intellect, wisdom, fortitude = 100, 120, 100, 110, 100
         defense = {'armor': 8, 'reflex': 12, 'cut': 1, 'stab': 4, 'bash': 2}
@@ -153,7 +153,7 @@ class Archer(Mob):
 
 
 class Rogue(Mob):
-    def __init__(self, loc_x: int, loc_y: int, name='Rogue'):
+    def __init__(self, loc_x: int, loc_y: int, name: str = 'Rogue'):
         health, stamina, mana = random.randint(14, 18), random.randint(8, 10), 0
         strength, agility, intellect, wisdom, fortitude = 90, 120, 100, 110, 110
         defense = {'armor': 10, 'reflex': 12, 'cut': 2, 'stab': 3, 'bash': 1}
@@ -172,7 +172,7 @@ class Rogue(Mob):
 
 
 class Merchant(NPC):
-    def __init__(self, loc_x: int, loc_y: int, name='Merchant'):
+    def __init__(self, loc_x: int, loc_y: int, name: str = 'Merchant'):
         health, stamina, mana = random.randint(12, 15), random.randint(5, 8), 0
         strength, agility, intellect, wisdom, fortitude = 90, 100, 120, 110, 100
         defense = {'armor': 2, 'reflex': 6, 'cut': 1, 'stab': 1, 'bash': 1}
