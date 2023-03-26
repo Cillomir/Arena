@@ -54,12 +54,12 @@ class PC(Character):
         self.skill_exotic = {'hook': 0, 'scythe': 0, 'sickle': 0, 'bola': 0, 'boomerang': 0}
         self.skill_armor = {'shield': 0, 'light': 0, 'medium': 0, 'heavy': 0}
         # Combat Skills:
-        self.skills_attacks = {'second': 0, 'third': 0, 'fourth': 0, 'fifth': 0}
-        self.skills_combat = {'hand-to-hand': 0, 'blind-fighting': 0, 'martial-arts': 0, 'enhance damage': 0}
-        self.skills_combat.update({'kick': 0, 'bash': 0, 'sweep': 0, 'charge': 0, 'grapple': 0, 'feint': 0})
-        self.skills_combat.update({'defend': 0, 'slash': 0, 'disarm': 0, 'tackle': 0})
+        self.skill_attacks = {'second': 0, 'third': 0, 'fourth': 0, 'fifth': 0}
+        self.skill_combat = {'hand-to-hand': 0, 'blind-fighting': 0, 'martial-arts': 0, 'enhance damage': 0}
+        self.skill_combat.update({'kick': 0, 'bash': 0, 'slash': 0, 'stab': 0, 'charge': 0})
+        self.skill_combat.update({'disarm': 0, 'sweep': 0, 'grapple': 0, 'feint': 0, 'tackle': 0})
         # Defense Skills:
-        self.skill_defense = {'parry': 0, 'dodge': 5, 'block': 0}
+        self.skill_defense = {'defend': 0, 'parry': 0, 'dodge': 5, 'block': 0}
         self.skill_defense.update({'second defence': 0, 'discipline': 0})
         # Technical Skills:
         self.skill_technical = {'stealth': 0, 'sneak': 0, 'hide': 0, 'scan': 0, 'tracking': 0, 'meditation': 0}
@@ -132,6 +132,7 @@ class PC(Character):
             enemy.health -= damage
             if enemy.health <= 0:
                 print(f'You have slain {enemy.name}!')
+                enemy.dead = True
         else:
             print(f'You attacked {enemy.name} and missed')
         return
@@ -140,22 +141,22 @@ class PC(Character):
         system('cls')
         print(f'\nName: {self.name} {" " * (20 - len(self.name))} Location: ({self.loc_x}, {self.loc_y})')
         print(f'\nHealth: {self.health}')
-        print(f'\nStrength: {self.strength}')
-        print(f'Agility: {self.agility}')
-        print(f'Intellect: {self.intellect}')
-        print(f'Wisdom: {self.wisdom}')
-        print(f'Fortitude: {self.fortitude}')
-        print(f'\nWeapon:    ', end='')
+        print(f'\n{"Strength:":<10} {self.strength}', end='\t\t')
+        print(f'{"Agility:":<8} {self.agility}')
+        print(f'{"Intellect:":<10} {self.intellect}', end='\t\t')
+        print(f'{"Wisdom:":<8} {self.wisdom}')
+        print(f'{"Fortitude:":<10} {self.fortitude}')
+        print(f'\n{"Weapon:":<8}', end='------ ')
         print('Nothing' if self.equipment["Weapon"] is None else self.equipment["Weapon"].name)
-        print(f'Off-Hand:  ', end='')
+        print(f'{"Off-Hand:":<10}', end='---- ')
         print('Nothing' if self.equipment["Off-Hand"] is None else self.equipment["Off-Hand"].name)
-        print(f'Armor:     ', end='')
+        print(f'{"Armor:":<8}', end='------ ')
         print('Nothing' if self.equipment["Armor"] is None else self.equipment["Armor"].name)
-        print(f'Head:      ', end='')
+        print(f'{"Head:":<8}', end='------ ')
         print('Nothing' if self.equipment["Head"] is None else self.equipment["Head"].name)
-        print(f'Hands:     ', end='')
+        print(f'{"Hands":<8}', end='------ ')
         print('Nothing' if self.equipment["Hands"] is None else self.equipment["Hands"].name)
-        print(f'Feet:      ', end='')
+        print(f'{"Feet:":<8}', end='------ ')
         print('Nothing' if self.equipment["Feet"] is None else self.equipment["Feet"].name)
         input("\nPress ENTER to continue...")
 
@@ -276,6 +277,10 @@ def player_class(pc_player: 'PC', pc_class):
         pc_player.intellect += 20
         pc_player.fortitude += 10
         pass
+
+
+def player_job(pc_player: PC, pc_job):
+    pass
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
