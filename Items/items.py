@@ -85,3 +85,35 @@ def check_items():
 if __name__ == '__main__':
     init()
     check_items()
+
+
+class Resource:
+    def __init__(self, name: str, loc_x: int, loc_y: int,
+                 node_type: str, amount: int, minimum: int, respawn: int, delay: int):
+        self.name = name
+        self.loc_x = loc_x
+        self.loc_y = loc_y
+        self.node_type = node_type
+        if node_type == 'Iron':
+            self.resource_type = 'Iron Ore'
+        elif node_type == 'Steel':
+            self.resource_type = 'Steel Ore'
+        elif node_type == 'Gold':
+            self.resource_type = 'Gold Ore'
+        elif node_type == 'Oak' or node_type == 'Maple' or node_type == 'Spruce':
+            self.resource_type = 'Wood Logs'
+        self.node_current = amount
+        self.node_maximum = amount
+        self.node_minimum = minimum
+        self.node_count = 0
+        self.node_respawn = respawn
+        self.node_delay = delay
+
+
+all_resource = list()
+all_resource.append(Resource('Iron Vein', 0, 0, 'Iron', 3, 1, 3, 5))
+all_resource.append(Resource('Steel Vein', 0, 0, 'Steel', 3, 1, 3, 5))
+all_resource.append(Resource('Gold Vein', 0, 0, 'Gold', 3, 1, 3, 5))
+all_resource.append(Resource('Oak Tree', 0, 0, 'Oak', 3, 1, 3, 5))
+all_resource.append(Resource('Maple Tree', 0, 0, 'Maple', 3, 1, 3, 5))
+all_resource.append(Resource('Spruce Tree', 0, 0, 'Spruce', 3, 1, 3, 5))

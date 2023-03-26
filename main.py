@@ -59,10 +59,19 @@ def combat_timer_tick(user: player.PC, mob: characters.Mob):
         mob.attack(user)
 
 
+def resource_ticker_tick():
+    resource_timer.count += 1
+    for r in all_resources:
+        if r.node_current < r.node_minimum:
+            if r.node_count >= r.node_respawn and random.randint(0, r.node_delay - r.node_count) < 1:
+                r.node_current += 1
+
 mob_timer = ticker.Scheduler(1, mob_timer_tick)
 mob_timer.mob_count = 0
 #combat_timer = ticker.Scheduler(5, combat_timer_tick)
 #combat_timer.combat_count = 0
+resource_timer = ticker.Scheduler(10, resource_timer_tick)
+resource_timer.resource_count = 0
 
 
 def __main__():
