@@ -12,7 +12,10 @@ import area
 import ticker
 import colors
 import random
+import Items.items as items
 from os import system
+
+items.init()
 
 colors.init()
 width = height = 10
@@ -61,7 +64,7 @@ def combat_timer_tick(user: player.PC, mob: characters.Mob):
 
 def resource_ticker_tick():
     resource_timer.count += 1
-    for r in all_resources:
+    for r in items.all_resources:
         if r.node_current < r.node_minimum:
             if r.node_count >= r.node_respawn and random.randint(0, r.node_delay - r.node_count) < 1:
                 r.node_current += 1

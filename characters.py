@@ -12,6 +12,7 @@ it.init('Items/Items.csv')
 
 
 class Character:
+    all_characters = list()
     def __init__(self, name: str, loc_x: int, loc_y: int, health: int, stamina: int, mana: int,
                  strength: int, agility: int, intellect: int, wisdom: int, fortitude: int,
                  defense: dict[str, int], resist: dict[str, int]):
@@ -45,9 +46,11 @@ class Character:
                        'light': 0 if 'light' not in resist else resist['light'],
                        'dark': 0 if 'dark' not in resist else resist['dark'],
                        'disease': 0 if 'disease' not in resist else resist['disease']}
-
+        Character.all_characters.append(self)
 
 class Mob(Character):
+    all_mobs = list()
+
     def __init__(self, name, loc_x: int, loc_y: int, health: int, stamina: int, mana: int,
                  strength: int, agility: int, intellect: int, wisdom: int, fortitude: int,
                  defense: dict[str: int], resist: dict[str: int],
@@ -57,6 +60,7 @@ class Mob(Character):
         self.mob_race = mob_race
         self.mob_class = mob_class
         self.mob_job = mob_job
+        Mob.all_mobs.append(self)
 
     def move(self, exits: list[str]):
         direction = random.choice(exits)
@@ -84,6 +88,8 @@ class Mob(Character):
 
 
 class NPC(Character):
+    all_npc = list()
+
     def __init__(self, name, loc_x: int, loc_y: int, health: int, stamina: int, mana: int,
                  strength: int, agility: int, intellect: int, wisdom: int, fortitude: int,
                  defense: dict[str: int], resist: dict[str: int],
@@ -93,6 +99,7 @@ class NPC(Character):
         self.npc_race = npc_race
         self.npc_class = npc_class
         self.npc_job = npc_job
+        NPC.all_npc.append(self)
 
 
 class Fighter(Mob):

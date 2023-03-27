@@ -6,26 +6,35 @@ Created on 3/16/2023
 """
 
 import random
-items = list()
-
 
 def init(path='Items.csv'):
+    global all_items, all_resources
+    all_items = list()
+    all_resources = list()
     try:
         f = open(path, 'rt')
-        global items
         row = 0
         for i in f:
             if row == 0:
                 row += 1
                 continue
             item = i.split(",")
-            items.append(Item(item[0], item[1], item[2], item[3]))
+            all_items.append(Item(item[0], item[1], item[2], item[3]))
     except FileNotFoundError as er:
         print(f'Unable to open items file: {er}')
+
+    all_resources.append(Resource('Iron Vein', 0, 0, 'Iron', 3, 1, 3, 5))
+    all_resources.append(Resource('Steel Vein', 0, 0, 'Steel', 3, 1, 3, 5))
+    all_resources.append(Resource('Gold Vein', 0, 0, 'Gold', 3, 1, 3, 5))
+    all_resources.append(Resource('Oak Tree', 0, 0, 'Oak', 3, 1, 3, 5))
+    all_resources.append(Resource('Maple Tree', 0, 0, 'Maple', 3, 1, 3, 5))
+    all_resources.append(Resource('Spruce Tree', 0, 0, 'Spruce', 3, 1, 3, 5))
 
 
 class Item:
     """ General item category """
+    all_items = list()
+
     def __init__(self, name, category, stat, boost):
         self.name = name
         self.category = category
@@ -33,6 +42,7 @@ class Item:
         self.boost = boost
         self.loc_x = -1
         self.loc_y = -1
+        Item.all_items.append(self)
 
 
 class Weapon(Item):
@@ -75,7 +85,7 @@ class CoinPouch(Container):
 
 def check_items():
     """ For testing item information and parsing"""
-    for x in items:
+    for x in Items.all_items:
         print(vars(x))
         for y in [a for a in dir(x) if a[:2] != '__']:
             print(y, end=', ')
@@ -88,6 +98,8 @@ if __name__ == '__main__':
 
 
 class Resource:
+    all_resources = list()
+
     def __init__(self, name: str, loc_x: int, loc_y: int,
                  node_type: str, amount: int, minimum: int, respawn: int, delay: int):
         self.name = name
@@ -108,12 +120,6 @@ class Resource:
         self.node_count = 0
         self.node_respawn = respawn
         self.node_delay = delay
+        Resource.all_resources.append(self)
 
 
-all_resource = list()
-all_resource.append(Resource('Iron Vein', 0, 0, 'Iron', 3, 1, 3, 5))
-all_resource.append(Resource('Steel Vein', 0, 0, 'Steel', 3, 1, 3, 5))
-all_resource.append(Resource('Gold Vein', 0, 0, 'Gold', 3, 1, 3, 5))
-all_resource.append(Resource('Oak Tree', 0, 0, 'Oak', 3, 1, 3, 5))
-all_resource.append(Resource('Maple Tree', 0, 0, 'Maple', 3, 1, 3, 5))
-all_resource.append(Resource('Spruce Tree', 0, 0, 'Spruce', 3, 1, 3, 5))
