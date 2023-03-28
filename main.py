@@ -35,9 +35,9 @@ for x in range(place.width):
         if (x, y) not in place.walls:
             arena.append((x, y))
 room = random.choice(arena)
-all_creatures.append(characters.Mob('A Fighter', room[0], room[1], 15, 5, 4))
+all_creatures.append(characters.Fighter(room[0], room[1], 'A Fighter'))
 room = random.choice(arena)
-all_creatures.append(characters.Mob('A Fighter', room[0], room[1], 15, 5, 4))
+all_creatures.append(characters.Fighter(room[0], room[1], 'A Fighter'))
 
 
 def mob_timer_tick():
@@ -49,32 +49,30 @@ def mob_timer_tick():
         if mob_timer.mob_count >= 100 and random.randint(0, 120 - mob_timer.mob_count) < 5:
             rooms = [loc for loc in arena if loc != (player.player.loc_x, player.player.loc_y)]
             mob_room = rooms[random.choice(rooms)]
-            all_creatures.append(characters.Mob(mob_room[0], mob_room[1]))
+            all_creatures.append(characters.Fighter(mob_room[0], mob_room[1]))
             mob_timer.mob_count = 0
         else:
             mob_timer.mob_count += 1
 
 
 def combat_timer_tick(user: player.PC, mob: characters.Mob):
-    combat_timer.count += 1
+    #combat_timer.count += 1
     user.attack(mob)
     if not mob.dead:
         mob.attack(user)
 
 
 def resource_ticker_tick():
-    resource_timer.count += 1
-    for r in items.all_resources:
+    #resource_timer.count += 1
+    for r in items.Resource.all_resources:
         if r.node_current < r.node_minimum:
             if r.node_count >= r.node_respawn and random.randint(0, r.node_delay - r.node_count) < 1:
                 r.node_current += 1
 
+
 mob_timer = ticker.Scheduler(1, mob_timer_tick)
-mob_timer.mob_count = 0
 #combat_timer = ticker.Scheduler(5, combat_timer_tick)
-#combat_timer.combat_count = 0
-resource_timer = ticker.Scheduler(10, resource_timer_tick)
-resource_timer.resource_count = 0
+#resource_timer = ticker.Scheduler(10, resource_timer_tick)
 
 
 def __main__():
