@@ -7,6 +7,7 @@ Created on 3/16/2023
 
 import random
 
+
 def init(path='Items.csv'):
     global all_items, all_resources
     all_items = list()
@@ -85,7 +86,7 @@ class CoinPouch(Container):
 
 def check_items():
     """ For testing item information and parsing"""
-    for x in Items.all_items:
+    for x in Item.all_items:
         print(vars(x))
         for y in [a for a in dir(x) if a[:2] != '__']:
             print(y, end=', ')
@@ -121,5 +122,3 @@ class Resource:
         self.node_respawn = respawn
         self.node_delay = delay
         Resource.all_resources.append(self)
-
-

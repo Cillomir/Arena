@@ -32,7 +32,7 @@ class Area:
                 elif (x, y) not in self.walls:
                     print(Fore.GREEN, '+', end=f'{Effect.RESET} ')
                 else:
-                    print(Fore.WHITE + Back.WHITE, '#', Effect.RESET, end='')
+                    print(Fore.LIGHT_GREY + Back.WHITE, '#', Effect.RESET, end='')
             print()
     
     def exits(self, loc_x: 'int', loc_y: 'int'):

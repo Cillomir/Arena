@@ -8,11 +8,11 @@ Created on Sat Mar 11 13:22:10 2023
 
 import random
 import Items.items as it
-it.init('Items/Items.csv')
 
 
 class Character:
     all_characters = list()
+
     def __init__(self, name: str, loc_x: int, loc_y: int, health: int, stamina: int, mana: int,
                  strength: int, agility: int, intellect: int, wisdom: int, fortitude: int,
                  defense: dict[str, int], resist: dict[str, int]):
@@ -47,6 +47,7 @@ class Character:
                        'dark': 0 if 'dark' not in resist else resist['dark'],
                        'disease': 0 if 'disease' not in resist else resist['disease']}
         Character.all_characters.append(self)
+
 
 class Mob(Character):
     all_mobs = list()

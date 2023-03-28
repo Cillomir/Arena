@@ -9,13 +9,13 @@ import menu
 import characters
 import player
 import area
-import ticker
+import schedules
 import colors
 import random
 import Items.items as items
 from os import system
 
-items.init()
+items.init('Items/Items.csv')
 
 colors.init()
 width = height = 10
@@ -70,9 +70,9 @@ def resource_ticker_tick():
                 r.node_current += 1
 
 
-mob_timer = ticker.Scheduler(1, mob_timer_tick)
-#combat_timer = ticker.Scheduler(5, combat_timer_tick)
-#resource_timer = ticker.Scheduler(10, resource_timer_tick)
+mob_timer = schedules.Scheduler(1, mob_timer_tick)
+#combat_timer = schedules.Scheduler(5, combat_timer_tick)
+#resource_timer = schedules.Scheduler(10, resource_timer_tick)
 
 
 def __main__():

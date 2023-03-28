@@ -27,22 +27,23 @@ class Effect:
 
 class Fore:
     BLACK = '\033[30m'
+    DARK_GREY = '\033[90m'
+    LIGHT_GREY = '\033[37m'
+    WHITE = '\033[97m'
     RED = '\033[31m'
     GREEN = '\033[32m'
     ORANGE = '\033[33m'
     BLUE = '\033[34m'
     PURPLE = '\033[35m'
     CYAN = '\033[36m'
-    WHITE = '\033[37m'
-    GREY = '\033[90m'
     LIGHT_RED = '\033[91m'
     LIGHT_GREEN = '\033[92m'
     YELLOW = '\033[93m'
     LIGHT_BLUE = '\033[94m'
-    PINK = '\033[95m'
+    VIOLET = '\033[95m'
     LIGHT_CYAN = '\033[96m'
 
-    def rgb(red, green, blue):
+    def rgb(self, red, green, blue):
         return f'\u001b[38;2;{red};{green};{blue}m'
 
 
@@ -56,5 +57,5 @@ class Back:
     CYAN = '\033[46m'
     WHITE = '\033[47m'
 
-    def rgb(red, green, blue):
+    def rgb(self, red, green, blue):
         return f'\u001b[48;2;{red};{green};{blue}m'
