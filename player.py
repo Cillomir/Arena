@@ -24,21 +24,20 @@ import random
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class PC(Character):
     def __init__(self, name: 'str', loc_x: 'int', loc_y: 'int'):
-        super().__init__(name, loc_x, loc_y, 20)
+        health, stamina, mana = 20, 12, 5
         # Primary Stats: 80 base, 100 average, 250 normal max, 400 hero max
-        self.strength = 80
-        self.agility = 80
-        self.intellect = 80
-        self.wisdom = 80
-        self.fortitude = 80
+        strength = agility = intellect = wisdom = fortitude = 80
+        defense = {'armor': 5, 'reflex': 5, 'cut': 1, 'stab': 1, 'bash': 1}
+        resist = {'fire': 0, 'water': 0, 'earth': 0, 'air': 0, 'cold': 0, 'electric': 0,
+                  'toxin': 0, 'poison': 0, 'light': 0, 'dark': 0, 'disease': 0}
+
+        super().__init__(name, loc_x, loc_y, health, stamina, mana,
+                         strength, agility, intellect, wisdom, fortitude, defense, resist)
         self.xp = {'level': 1, 'experience': 0, 'training': 5, 'practice': 5, 'skill': 5, 'spell': 5}
         # Secondary Stats
-        self.health = {'current': 20, 'max': 20, 'potential': 20}
-        self.stamina = {'current': 10, 'max': 10, 'potential': 10}
-        self.spirit = {'current': 10, 'max': 10, 'potential': 10}
-        self.defense = {'armor': 10, 'reflex': 0, 'cut': 0, 'stab': 0, 'bash': 0}
-        self.resist = {'fire': 0, 'water': 0, 'earth': 0, 'air': 0, 'cold': 0, 'electric': 0}
-        self.resist.update({'toxin': 0, 'poison': 0, 'light': 0, 'dark': 0, 'disease': 0})
+        self.health.update({'potential': health})
+        self.stamina.update({'potential': stamina})
+        self.mana.update({'potential': mana})
         # Other Stats (?): Reputation, Luck, Charm/Poise, Knowledge, Personality
         # Other Stats (?): Sanity, Courage, Balance
         self.pc_race = None
