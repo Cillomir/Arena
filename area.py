@@ -18,8 +18,8 @@ class Area:
         self.height = int(height)
         self.walls = walls
     
-    def show(self, creatures: 'list[characters.Character]'):
-        character = [(c.loc_x, c.loc_y) for c in creatures if type(c) is player.PC]
+    def show(self, creatures: 'list[characters.Character]', pc_player: player.PC):
+        character = [(pc_player.loc_x, pc_player.loc_y)]
         mobiles = [(c.loc_x, c.loc_y) for c in creatures if type(c) is characters.Mob]
 
         for y in range(self.height):

@@ -46,13 +46,13 @@ def mob_timer_tick():
             c.move(place.exits(c.loc_x, c.loc_y))
             mob_timer.count = 0
     if len([c for c in all_creatures if type(c) is characters.Mob]) < 2:
-        if mob_timer.mob_count >= 100 and random.randint(0, 120 - mob_timer.mob_count) < 5:
+        if mob_timer.count >= 100 and random.randint(0, 120 - mob_timer.count) < 5:
             rooms = [loc for loc in arena if loc != (player.player.loc_x, player.player.loc_y)]
             mob_room = rooms[random.choice(rooms)]
             all_creatures.append(characters.Fighter(mob_room[0], mob_room[1]))
-            mob_timer.mob_count = 0
+            mob_timer.count = 0
         else:
-            mob_timer.mob_count += 1
+            mob_timer.count += 1
 
 
 def combat_timer_tick(user: player.PC, mob: characters.Mob):
@@ -82,8 +82,8 @@ def __main__():
     while True:
         system('cls')
         print('\n\n\n')
-        place.show(all_creatures)
-        area.show_creatures(player.player.loc_x, player.player.loc_y, all_creatures)
+        place.show(characters.Character.all_characters, player.player)
+        area.show_creatures(player.player.loc_x, player.player.loc_y, characters.Character.all_characters)
         if menu.menu(player.player, place):
             print("Quitting...")
             mob_timer.stop()
