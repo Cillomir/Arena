@@ -46,9 +46,9 @@ def __main__():
     while True:
         system('cls')
         print('\n\n\n')
-        arena.show(characters.Character.all_characters, player.player)
-        area.show_creatures(player.player.loc_x, player.player.loc_y, characters.Character.all_characters)
-        if menu.menu(player.player, arena):
+        arena.show(characters.Character.all_characters, player.main_player)
+        area.show_creatures(player.main_player.loc_x, player.main_player.loc_y, characters.Character.all_characters)
+        if menu.menu(arena):
             print("Quitting...")
             schedules.mob_timer.stop()
             exit()

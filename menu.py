@@ -7,14 +7,14 @@ Created on Sat Mar 11 13:50:00 2023
 
 import area
 from os import system
-import player
+from player import new_player, load_player, save_player, main_player
 from colors import Effect, Fore, Back
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~ Pre-Game Menu                          ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def start_menu():
+def start_menu() -> None:
     while True:
         system('cls')
         print(Fore.CYAN, Effect.BOLD, 'Welcome to the Arena', Effect.RESET)
@@ -54,11 +54,11 @@ def new_game() -> bool:
             name = name[0].upper() + name[1:].lower()
             print(f'Welcome {name}')
             break
-    player.new_player(name)
+    new_player(name)
     return True
 
 
-def load_game():
+def load_game() -> bool:
     print('\n\tType RETURN to go back to the main menu')
     while True:
         name = input('Enter the name to load: ')
@@ -69,7 +69,7 @@ def load_game():
             print('Please enter a valid name (a single word containing only letters)')
         else:
             name = name[0].upper() + name[1:].lower()
-            if player.load_player(name):
+            if load_player(name):
                 print(f'Welcome back {name}')
                 break
             else:
@@ -88,8 +88,8 @@ def settings():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~ In-Game Menu                           ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def menu(user: player.PC, place: area.Area):
-    exits = place.exits(user.loc_x, user.loc_y)
+def menu(place: area.Area) -> bool:
+    exits = place.exits(main_player.loc_x, main_player.loc_y)
     print('\n\tAvailable exits (', end='')
     for e in exits:
         print(f"'{e}'", end=',')
@@ -98,13 +98,13 @@ def menu(user: player.PC, place: area.Area):
     cmd = input('\tEnter a command: ')
     cmd = cmd.lower().strip()
     if cmd == 'gold' or cmd == 'silver' or cmd == 'copper' or cmd == 'coin' or cmd == 'money':
-        user.look_inside(user.inventory[1])
+        main_player.look_inside(main_player.inventory[1])
     elif cmd == 'st' or cmd == 'stat' or cmd == 'stats':
-        player.player.see_stats()
+        main_player.see_stats()
     elif cmd == 'in' or cmd == 'inv' or cmd == 'inventory':
-        player.player.see_inventory()
+        main_player.see_inventory()
     elif cmd == "sav" or cmd == 'save':
-        player.save_player()
+        save_player()
     elif cmd == 'q' or cmd == 'qu' or cmd == 'quit':
         return True
     else:
@@ -114,7 +114,7 @@ def menu(user: player.PC, place: area.Area):
         elif spl[0] == 'look' and spl[1] == 'around':
             return False
         elif spl[0] == 'direction' and spl[1] in exits:
-            user.move(spl[1])
+            main_player.move(spl[1])
         elif spl[0] == 'mob':
             pass
         elif spl[0] == 'container':
@@ -129,7 +129,7 @@ def menu(user: player.PC, place: area.Area):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~ Input Interpreter                      ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def read_input(user_input: 'str') -> (str, str) or (None, None):
+def read_input(user_input: str) -> (str, str) or (None, None):
     if user_input == 's' or user_input == 'sou' or user_input == 'sout' or user_input == 'south':
         return 'direction', 's'
     elif user_input == 'n' or user_input == 'nor' or user_input == 'nort' or user_input == 'north':

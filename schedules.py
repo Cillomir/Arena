@@ -7,6 +7,10 @@ Created on Sat Mar 11 13:17:52 2023
 
 
 from threading import Timer, Lock, Thread, Event
+import random
+import characters
+import player
+from Items.items import Resource
 
 
 # as per https://stackoverflow.com/questions/12435211/threading-timer-repeat-function-every-n-seconds
@@ -43,15 +47,15 @@ class Scheduler:
 
 
 def mob_timer_tick():
-    for c in all_creatures:
+    for c in characters.Character.all_characters:
         if type(c) is characters.Mob and random.randint(0, 30 - mob_timer.count % 30) <= 5:
             c.move(place.exits(c.loc_x, c.loc_y))
             mob_timer.count = 0
-    if len([c for c in all_creatures if type(c) is characters.Mob]) < 2:
+    if len([c for c in characters.Character.all_characters if type(c) is characters.Mob]) < 2:
         if mob_timer.count >= 100 and random.randint(0, 120 - mob_timer.count) < 5:
-            rooms = [loc for loc in arena if loc != (player.player.loc_x, player.player.loc_y)]
+            rooms = [loc for loc in arena if loc != (player.main_player.loc_x, player.main_player.loc_y)]
             mob_room = rooms[random.choice(rooms)]
-            all_creatures.append(characters.Fighter(mob_room[0], mob_room[1]))
+            characters.Character.all_characters.append(characters.Fighter(mob_room[0], mob_room[1]))
             mob_timer.count = 0
         else:
             mob_timer.count += 1
@@ -66,13 +70,12 @@ def combat_timer_tick(user: player.PC, mob: characters.Mob):
 
 def resource_ticker_tick():
     #resource_timer.count += 1
-    for r in items.Resource.all_resources:
+    for r in Resource.all_resources:
         if r.node_current < r.node_minimum:
             if r.node_count >= r.node_respawn and random.randint(0, r.node_delay - r.node_count) < 1:
                 r.node_current += 1
 
 
-mob_timer = schedules.Scheduler(1, mob_timer_tick)
+mob_timer = Scheduler(1, mob_timer_tick)
 #combat_timer = schedules.Scheduler(5, combat_timer_tick)
 #resource_timer = schedules.Scheduler(10, resource_timer_tick)
-

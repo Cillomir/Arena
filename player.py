@@ -125,7 +125,7 @@ class PC(Character):
 
     def attack(self, enemy: 'Mob'):
         to_hit = random.randint(1, 20) + self.agility
-        if to_hit >= enemy.dex + 10:
+        if to_hit >= enemy.agility + 10:
             damage = random.randint(1, 8) + self.strength
             print(f'You hit {enemy.name} for {damage} damage!')
             enemy.health -= damage
@@ -174,10 +174,10 @@ class PC(Character):
                 print(f'Your {container.name} is empty. It can hold {container.size} items.')
             else:
                 print(f'In your {container.name} you have:')
-                print(colors.Fore.cyan)
+                print(colors.Fore.CYAN)
                 for i in container.contents:
-                    print(colors.Fore.cyan, i.name)
-                print(colors.Effect.reset)
+                    print(colors.Fore.CYAN, i.name)
+                print(colors.Effect.RESET)
                 print(f'It has {len(container.contents)} of {container.size} items in it.')
         input("\nPress ENTER to continue...")
 
@@ -185,15 +185,15 @@ class PC(Character):
         pass
 
 
-player = PC('user', 0, 0)
+main_player = PC('user', 0, 0)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~ Create new player data                ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def new_player(name: str):
-    global player
-    player = PC(name, 5, 5)
+    global main_player
+    main_player = PC(name, 5, 5)
 
 
 def player_gender(pc_player: PC, gender: str):
@@ -286,7 +286,7 @@ def player_job(pc_player: PC, pc_job):
 # ~~~~~~ Load player data                      ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def load_player(name: str) -> bool:
-    global player
+    global main_player
     try:
         file = open('player.txt', 'rt')
         try:
@@ -296,7 +296,7 @@ def load_player(name: str) -> bool:
                 print('There is no record of that character.')
                 file.close()
                 return False
-            player.load(load_data[name])
+            main_player.load(load_data[name])
             print('Successfully loaded save data')
             file.close()
             return True
@@ -313,7 +313,7 @@ def load_player(name: str) -> bool:
 # ~~~~~~ Save player data                      ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def save_player():
-    global player
+    global main_player
     file = None
     save_data = dict()
     try:
@@ -322,25 +322,25 @@ def save_player():
             temp = file.read()
             if len(temp) > 0:
                 save_data = loads(temp)
-                if player.name in save_data:
+                if main_player.name in save_data:
                     print('That character file already exists.')
-                    cmd = input(f'Do you want to overwrite {player.name}? [Y/N] ').lower()
+                    cmd = input(f'Do you want to overwrite {main_player.name}? [Y/N] ').lower()
                     while cmd != 'n' and cmd != 'y':
                         print('Please enter a valid option')
-                        cmd = input(f'Do you want to overwrite {player.name}? [Y/N] ').lower()
+                        cmd = input(f'Do you want to overwrite {main_player.name}? [Y/N] ').lower()
                     if cmd == 'n':
                         return
+        except FileNotFoundError:
+            print('Unable to find existing file')
         except OSError:
             print('Unable to validate save file')
             file.close()
-        except FileNotFoundError:
-            print('Unable to find existing file')
     except OSError:
         print('Unable to open save file for reading')
     try:
         file = open('player.txt', 'wt')
         try:
-            save_data[player.name] = player.__dict__
+            save_data[main_player.name] = main_player.__dict__
             file.write(dumps(save_data))
             print('Save successful')
             file.close()
