@@ -35,7 +35,7 @@ def start_menu() -> None:
                 break
         elif cmd == 'i' or cmd == 'instruction' or cmd == 'instructions':
             pass
-        elif cmd == 's' or cmd == 'setting' or cmd == 'settings':
+        elif cmd == 's' or cmd == 'set' or cmd == 'setting' or cmd == 'settings':
             pass
         elif cmd == 'q' or cmd == 'quit':
             exit()
@@ -44,8 +44,7 @@ def start_menu() -> None:
 def new_game() -> bool:
     print('\n\tType RETURN to go back to the main menu')
     while True:
-        name = input('Enter your name, adventurer: ')
-        name = name.strip()
+        name = (input('Enter your name, adventurer: ')).strip()
         if name == 'RETURN':
             return False
         elif name.isdigit() or not name.isalpha():
