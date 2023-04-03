@@ -141,45 +141,59 @@ class Zone:
                  doors_h: list[tuple[int, int]] = list(), doors_v: list[tuple[int, int]] = list(),
                  gates_h: list[tuple[int, int]] = list(), gates_v: list[tuple[int, int]] = list(),
                  trees: list[tuple[int, int]] = list(), bushes: list[tuple[int, int]] = list()):
-        self.width = width
+        self.width = width * 2
         self.height = height
         self.blk = dict()
-        for yi in range(height):
-            for xi in range(width):
+        for yi in range(self.height):
+            for xi in range(self.width):
                 self.blk[(xi, yi)] = (Fore.WHITE, Back.BLACK, Blocks.space)
+
+        # BORDER WALLS
         if border_walls:
             for xi in range(self.width):
-                self.blk[xi, 0] = (Fore.WHITE, Back.BLACK, Blocks.hor_thick)
-                self.blk[xi, height - 1] = (Fore.WHITE, Back.BLACK, Blocks.hor_thick)
+                self.blk[xi, 0] = (Fore.WHITE, Back.BLACK, Blocks.box_double_hor)
+                self.blk[xi, self.height - 1] = (Fore.WHITE, Back.BLACK, Blocks.box_double_hor)
             for yi in range(self.height):
-                self.blk[0, yi] = (Fore.WHITE, Back.BLACK, Blocks.ver_thick)
-                self.blk[width - 1, yi] = (Fore.WHITE, Back.BLACK, Blocks.ver_thick)
-            self.blk[0, 0] = (Fore.WHITE, Back.BLACK, Blocks.nw_thick)
-            self.blk[0, self.height - 1] = (Fore.WHITE, Back.BLACK, Blocks.sw_thick)
-            self.blk[self.width - 1, 0] = (Fore.WHITE, Back.BLACK, Blocks.ne_thick)
-            self.blk[self.width - 1, self.height - 1] = (Fore.WHITE, Back.BLACK, Blocks.se_thick)
-        for p in pillars:
-            self.blk[p] = (Fore.WHITE, Back.BLACK, Blocks.pillar)
-        for b in buildings:
-            self.blk[b] = (Fore.WHITE, Back.BLACK, Blocks.door_hor)
-            self.blk[b[0]-1, b[1]] = (Fore.WHITE, Back.BLACK, Blocks.nw_curve)
-            self.blk[b[0]-1, b[1]+1] = (Fore.WHITE, Back.BLACK, Blocks.sw_curve)
-            self.blk[b[0], b[1]+1] = (Fore.WHITE, Back.BLACK, Blocks.hor_thin)
-            self.blk[b[0]+1, b[1]+1] = (Fore.WHITE, Back.BLACK, Blocks.se_curve)
-            self.blk[b[0]+1, b[1]] = (Fore.WHITE, Back.BLACK, Blocks.ne_curve)
+                self.blk[0, yi] = (Fore.WHITE, Back.BLACK, Blocks.box_double_ver)
+                self.blk[self.width - 1, yi] = (Fore.WHITE, Back.BLACK, Blocks.box_double_ver)
+            self.blk[0, 0] = (Fore.WHITE, Back.BLACK, Blocks.nw_double)
+            self.blk[0, self.height - 1] = (Fore.WHITE, Back.BLACK, Blocks.sw_double)
+            self.blk[self.width - 1, 0] = (Fore.WHITE, Back.BLACK, Blocks.ne_double)
+            self.blk[self.width - 1, self.height - 1] = (Fore.WHITE, Back.BLACK, Blocks.se_double)
 
+        # BUILDINGS
+        self.buildings = buildings
+        for b in buildings:
+            self.blk[b[0] * 2 - 2, b[1] - 0] = (Fore.WHITE, Back.BLACK, Blocks.sw_curve)
+            self.blk[b[0] * 2 - 1, b[1] - 0] = (Fore.BLUE, Back.BLACK, Blocks.door_hor)
+            self.blk[b[0] * 2 + 0, b[1] - 0] = (Fore.BLUE, Back.BLACK, Blocks.door_hor)
+            self.blk[b[0] * 2 + 1, b[1] - 0] = (Fore.BLUE, Back.BLACK, Blocks.door_hor)
+            self.blk[b[0] * 2 + 2, b[1] - 0] = (Fore.WHITE, Back.BLACK, Blocks.se_curve)
+            self.blk[b[0] * 2 - 2, b[1] - 1] = (Fore.WHITE, Back.BLACK, Blocks.nw_curve)
+            self.blk[b[0] * 2 - 1, b[1] - 1] = (Fore.WHITE, Back.BLACK, Blocks.hor_thin)
+            self.blk[b[0] * 2 + 0, b[1] - 1] = (Fore.WHITE, Back.BLACK, Blocks.hor_thin)
+            self.blk[b[0] * 2 + 1, b[1] - 1] = (Fore.WHITE, Back.BLACK, Blocks.hor_thin)
+            self.blk[b[0] * 2 + 2, b[1] - 1] = (Fore.WHITE, Back.BLACK, Blocks.ne_curve)
+
+        # OTHER (Pillars, Trees, Bushes, etc.)
         self.pillars = pillars
+        self.trees = trees
+        self.bushes = bushes
+        for p in pillars:
+            self.blk[(p[0] * 2, p[1])] = (Fore.WHITE, Back.BLACK, Blocks.pillar)
+        for t in trees:
+            self.blk[(t[0] * 2, t[1])] = (Fore.GREEN, Back.BLACK, Blocks.tree)
+        for b in bushes:
+            self.blk[(b[0] * 2, b[1])] = (Fore.LIGHT_GREEN, Back.BLACK, Blocks.bush)
+
         self.doors_h = doors_h
         self.doors_v = doors_v
         self.gates_h = gates_h
         self.gates_v = gates_v
-        self.trees = trees
-        self.bushes = bushes
-        self.buildings = buildings
         self.spawn = list()
         for xi in range(self.width):
             for yi in range(self.height):
-                if (xi, yi) not in self.walls:
+                if (xi, yi) not in walls:
                     self.spawn.append((xi, yi))
 
     def draw_zone(self):
@@ -188,8 +202,8 @@ class Zone:
             print('', end='\t')
             for xi in range(self.width):
                 if (xi, yi) in self.blk.keys():
-                    print(self.blk[(xi, yi)][0], self.blk[(xi, yi)][1], self.blk[(xi, yi)][2], end=f'{reset}')
-            print()
+                    print(self.blk[(xi, yi)][0] + self.blk[(xi, yi)][1] + self.blk[(xi, yi)][2], end=f'')
+            print(reset)
 
 
 def zone_arena():
@@ -224,27 +238,3 @@ if __name__ == '__main__':
     city = zone_city()
     city.draw_zone()
 
-    # for y in range(city.height):
-    #     print('', end='\t')
-    #     for x in range(city.width):
-    #         if (x, y) in city.doors_h:
-    #             print(Fore.BLUE, Blocks.door_hor, end=f'{res} ')
-    #         elif (x, y) in city.doors_v:
-    #             print(Fore.BLUE, Blocks.door_ver, end=f'{res}')
-    #         elif (x, y) in city.gates_h:
-    #             print(Fore.LIGHT_BLUE, Blocks.gate_hor, end=f'{res}')
-    #         elif (x, y) in city.gates_v:
-    #             print(Fore.LIGHT_BLUE, Blocks.gate_ver, end=f'{res}')
-    #         elif (x, y) in city.pillars:
-    #             print(Fore.DARK_GREY, Blocks.angle_box, end=f'{res}')
-    #         elif (x, y) in city.trees:
-    #             print(Fore.GREEN, Blocks.player_m, end=f'{res}')
-    #         elif (x, y) in city.bushes:
-    #             print(Fore.LIGHT_GREEN, Blocks.player_f, end=f'{res}')
-    #         elif (x, y) in city.dict_test.keys():
-    #             print(Fore.WHITE, city.dict_test[(x, y)], end=f'{res}')
-    #         elif (x, y) not in city.walls:
-    #             print(Fore.GREEN, Blocks.thin_block, end=f'{res}')
-    #         else:
-    #             print(Fore.LIGHT_GREY, Blocks.thick_block, end=f'{res}')
-    #     print()
