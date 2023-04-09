@@ -24,7 +24,7 @@ import random
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class PC(Character):
     def __init__(self, name: 'str', loc_x: 'int', loc_y: 'int'):
-        health, stamina, mana = 20, 12, 5
+        health, stamina, mana = 100, 100, 60
         # Primary Stats: 80 base, 100 average, 250 normal max, 400 hero max
         strength = agility = intellect = wisdom = fortitude = 80
         defense = {'armor': 5, 'reflex': 5, 'cut': 1, 'stab': 1, 'bash': 1}
