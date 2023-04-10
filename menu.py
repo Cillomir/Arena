@@ -7,14 +7,14 @@ Created on Sat Mar 11 13:50:00 2023
 
 import area
 from os import system
-from player import new_player, load_player, save_player, main_player
-from colors import Effect, Fore, Back
+from player import new_player, load_player, save_player, PC
+from Helpers.colors import Effect, Fore
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~ Pre-Game Menu                          ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def start_menu() -> None:
+def start_menu() -> PC:
     while True:
         system('cls')
         print(Fore.CYAN, Effect.BOLD, 'Welcome to the Arena', Effect.RESET)
@@ -28,7 +28,7 @@ def start_menu() -> None:
         print(Effect.RESET, end='')
         cmd = (input('Your command? ')).lower()
         if cmd == 'n' or cmd == 'new' or cmd == 'new game':
-            if new_game():
+            if new_game()[0]:
                 break
         elif cmd == 'l' or cmd == 'load' or cmd == 'load game':
             if load_game():
@@ -41,7 +41,7 @@ def start_menu() -> None:
             exit()
 
 
-def new_game() -> bool:
+def new_game() -> [bool, PC]:
     print('\n\tType RETURN to go back to the main menu')
     while True:
         name = (input('Enter your name, adventurer: ')).strip()
@@ -53,8 +53,8 @@ def new_game() -> bool:
             name = name[0].upper() + name[1:].lower()
             print(f'Welcome {name}')
             break
-    new_player(name)
-    return True
+    player = new_player(name)
+    return True, player
 
 
 def load_game() -> bool:

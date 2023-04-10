@@ -10,7 +10,7 @@ import characters
 import player
 import area
 import schedules
-import colors
+from Helpers import colors
 import random
 import Items.items as items
 from os import system
@@ -41,7 +41,7 @@ characters.Fighter(room[0], room[1], 'A Fighter')
 
 
 def __main__():
-    menu.start_menu()
+    player = menu.start_menu()
     schedules.mob_timer.start()
     while True:
         system('cls')

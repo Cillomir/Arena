@@ -5,10 +5,9 @@
 Created on  2023-03-14
 """
 
-
-import colors
+from Helpers import colors
 from characters import Character, Mob
-from Items.items import Item, Weapon, Armor, OffHand, Wearable, Container, CoinPouch
+from Items.items import Weapon, Armor, Wearable, Container, CoinPouch
 from json import loads, dumps
 from os import system
 import random
@@ -185,7 +184,7 @@ class PC(Character):
         pass
 
 
-main_player = PC('user', 0, 0)
+#main_player = PC('user', 0, 0)
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
