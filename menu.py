@@ -15,6 +15,7 @@ from Helpers.colors import Effect, Fore
 # ~~~~~ Pre-Game Menu                          ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def start_menu() -> PC:
+    pc_player = None
     while True:
         system('cls')
         print(Fore.CYAN, Effect.BOLD, 'Welcome to the Arena', Effect.RESET)
@@ -28,10 +29,14 @@ def start_menu() -> PC:
         print(Effect.RESET, end='')
         cmd = (input('Your command? ')).lower()
         if cmd == 'n' or cmd == 'new' or cmd == 'new game':
-            if new_game()[0]:
+            result = new_game()
+            if result is not None:
+                pc_player = result
                 break
         elif cmd == 'l' or cmd == 'load' or cmd == 'load game':
-            if load_game():
+            result = load_game()
+            if result is not None:
+                pc_player = result
                 break
         elif cmd == 'i' or cmd == 'instruction' or cmd == 'instructions':
             pass
@@ -39,41 +44,42 @@ def start_menu() -> PC:
             pass
         elif cmd == 'q' or cmd == 'quit':
             exit()
+    return pc_player
 
 
-def new_game() -> [bool, PC]:
+def new_game() -> PC or None:
+    result = None
     print('\n\tType RETURN to go back to the main menu')
     while True:
         name = (input('Enter your name, adventurer: ')).strip()
         if name == 'RETURN':
-            return False
+            break
         elif name.isdigit() or not name.isalpha():
             print('Please enter a valid name (a single word containing only letters)')
         else:
             name = name[0].upper() + name[1:].lower()
             print(f'Welcome {name}')
+            result = PC(name, 5, 5)
             break
-    player = new_player(name)
-    return True, player
+    return result
 
 
-def load_game() -> bool:
+def load_game() -> PC or None:
+    result = None
     print('\n\tType RETURN to go back to the main menu')
     while True:
         name = input('Enter the name to load: ')
         name = name.strip()
         if name == 'RETURN':
-            return False
+            break
         elif name.isdigit() or not name.isalpha():
             print('Please enter a valid name (a single word containing only letters)')
         else:
             name = name[0].upper() + name[1:].lower()
-            if load_player(name):
-                print(f'Welcome back {name}')
-                break
-            else:
-                return False
-    return True
+            result = load_player(name)
+            print(f'Welcome back {name}')
+            break
+    return result
 
 
 def instructions():
@@ -87,8 +93,8 @@ def settings():
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~ In-Game Menu                           ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def menu(place: area.Area) -> bool:
-    exits = place.exits(main_player.loc_x, main_player.loc_y)
+def menu(place: area.Area, pc_player: PC) -> bool:
+    exits = place.exits(pc_player.loc_x, pc_player.loc_y)
     print('\n\tAvailable exits (', end='')
     for e in exits:
         print(f"'{e}'", end=',')
@@ -97,11 +103,11 @@ def menu(place: area.Area) -> bool:
     cmd = input('\tEnter a command: ')
     cmd = cmd.lower().strip()
     if cmd == 'gold' or cmd == 'silver' or cmd == 'copper' or cmd == 'coin' or cmd == 'money':
-        main_player.look_inside(main_player.inventory[1])
+        pc_player.look_inside(pc_player.inventory[1])
     elif cmd == 'st' or cmd == 'stat' or cmd == 'stats':
-        main_player.see_stats()
+        pc_player.see_stats()
     elif cmd == 'in' or cmd == 'inv' or cmd == 'inventory':
-        main_player.see_inventory()
+        pc_player.see_inventory()
     elif cmd == "sav" or cmd == 'save':
         save_player()
     elif cmd == 'q' or cmd == 'qu' or cmd == 'quit':
@@ -113,7 +119,7 @@ def menu(place: area.Area) -> bool:
         elif spl[0] == 'look' and spl[1] == 'around':
             return False
         elif spl[0] == 'direction' and spl[1] in exits:
-            main_player.move(spl[1])
+            pc_player.move(spl[1])
         elif spl[0] == 'mob':
             pass
         elif spl[0] == 'container':

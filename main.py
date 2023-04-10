@@ -15,6 +15,8 @@ import random
 import Items.items as items
 from os import system
 
+pc_player = None
+
 items.init('Items/Items.csv')
 colors.init()
 
@@ -41,14 +43,15 @@ characters.Fighter(room[0], room[1], 'A Fighter')
 
 
 def __main__():
-    player = menu.start_menu()
+    global pc_player
+    pc_player = menu.start_menu()
     schedules.mob_timer.start()
     while True:
         system('cls')
         print('\n\n\n')
-        arena.show(characters.Character.all_characters, player.main_player)
-        area.show_creatures(player.main_player.loc_x, player.main_player.loc_y, characters.Character.all_characters)
-        if menu.menu(arena):
+        arena.show(characters.Character.all_characters, pc_player)
+        area.show_creatures(pc_player.loc_x, pc_player.loc_y, characters.Character.all_characters)
+        if menu.menu(arena, pc_player):
             print("Quitting...")
             schedules.mob_timer.stop()
             exit()

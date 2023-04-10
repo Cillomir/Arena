@@ -138,7 +138,9 @@ class PC(Character):
     def see_stats(self):
         system('cls')
         print(f'\nName: {self.name} {" " * (20 - len(self.name))} Location: ({self.loc_x}, {self.loc_y})')
-        print(f'\nHealth: {self.health}')
+        print(f'\nHealth:  {self.health["current"]}/{self.health["max"]}')
+        print(f'Stamina: {self.stamina["current"]}/{self.stamina["max"]}')
+        print(f'Mana:    {self.mana["current"]}/{self.mana["max"]}')
         print(f'\n{"Strength:":<10} {self.strength}', end='\t\t')
         print(f'{"Agility:":<8} {self.agility}')
         print(f'{"Intellect:":<10} {self.intellect}', end='\t\t')
@@ -190,9 +192,8 @@ class PC(Character):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ~~~~~~ Create new player data                ~~~~~
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def new_player(name: str):
-    global main_player
-    main_player = PC(name, 5, 5)
+def new_player(name: str) -> PC:
+    return PC(name, 5, 5)
 
 
 def player_gender(pc_player: PC, gender: str):
